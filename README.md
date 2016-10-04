@@ -1,2 +1,0 @@
-# KChVypocty
-Kvantovo-chemické výpočty
