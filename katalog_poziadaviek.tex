@@ -1,0 +1,121 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage{lmodern}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+
+\usepackage{enumitem}
+
+\begin{document}
+
+
+\begin{titlepage}
+	\centering
+	\par\vspace{1cm}
+	{\scshape\LARGE Kvantovo-chemické výpočty \par}
+	\vspace{1cm}
+
+	{\huge\bfseries Katalóg požiadaviek  \par}
+	\vspace{2cm}
+	{\Large\itshape Jaroslav Ištok \par}
+	{\Large\itshape Katarína Fabianová \par}
+	{\Large\itshape Dušan Suja \par}
+	{\Large\itshape Jerguš Adamec \par}
+	\vfill
+	{\large \today\par}
+\end{titlepage}
+
+\pagebreak
+
+\tableofcontents
+
+\pagebreak
+
+\section{Úvod}
+
+\subsection{Účel tohto dokumentu}
+Dokument obsahuje všetky požiadavky, ktoré bude aplikácia implementovať. Je určený pre všetkých, ktorí sa budú podielať na jej vývoji. Patrí sem zadávateľ, developeri, TODO dokoncit strana 26(23) v prezentacii
+
+\subsection{Rozsah projektu}
+Projekt sa radí medzi stredne veľké projekty a jeho vývoj bude prebiehať v časovom horizonte približne pol roka.
+Aplikácia bude obsahovať crawler, lexer, parser a orm na prácu s databázou a jednoduché intuitívne GUI.
+Bonusová funkcionalita: grafické zobrazenie jednotlivých analyzovaných molekúl.
+
+\subsection{Definície, akronymi a skratky}
+\begin{itemize}
+	\item Crawler - nástroj, ktorý prelieza adresáre na serveroch a hľadá súbory
+	\item Lexer - nástroj, ktorý analyzuje štruktúru súboru (dokumentu)
+	\item Parser - Nástroj na spracovanie údajov zo súborov
+	\item ORM - nástroj na prácu s databázou z programovacieho jazyka
+\end{itemize}
+
+\subsection{Odkazy}
+\begin{itemize}
+	\item item
+\end{itemize}
+
+\subsection{Prehľad zostávajucej časti dokumentu}
+V nasledujúcich kapitolách nájdete rozširujúce informácie o projekte.
+Všeobecný popis projektu, perspektívu projektu, podrobný popis funkcionality, účel projektu, charakteristiku cieľových používateľov projektu a iné.
+
+
+\section{Všeobecný popis}
+
+
+\subsection{Perspektíva projektu}
+\begin{itemize}
+	\item item
+\end{itemize}
+
+\subsection{Funkcionalita výslednej aplikácie}
+Výsledná aplikácia bude pracovať nasledujúcim spôsobom: \
+Vyhľadá súbory s dátatmi z meracích prístrojov na konkrétnych serveroch. Dáta zo súborov najskôr analyzuje, potom spracuje a uloží ich do databázy.
+V pravidelných časových intervaloch, alebo na vyžiadanie používateľa, bude rozširovať databázu o dáta z novopridaných súborov. Aplikácia poskytne používateľovi jednoduché a intuitívne webové rozhranie, v ktorom bude možné vykonávať požadované operácie nad dátami z databázy, ako je napríklad pokročilé vyhľadávanie na základe rôznych kritérii či možnosť jednoduchécho vykreslenia molekuly na základe údajov z databázy. Webové rozhranie bude vedieť poskytnúť informácie o určitej molekule, či bola niekedy analyzovaná, akými metódami bola analyzovaná a podobne. Na prácu s aplikáciou postačí pripojenie na internet a webový prehliadač. Aplikácia bude chránená heslom a každý používateľ bude mať svoje prihlasovacie údaje, ktoré bude možné zmeniť. Nových používateľov bude mocť pridávať iba administrátor.
+
+\subsection{Charakteristika používateľov}
+\begin{itemize}
+	\item item
+\end{itemize}
+
+\subsection{Všeobecné obmedzenia}
+\begin{itemize}
+	\item item
+\end{itemize}
+
+\section{Predpoklady a závislosti}
+
+
+\section{Zoznam špecifických požiadaviek na systém}
+\begin{enumerate}[label={[\arabic*]}]
+	\item { \bf Vyhľadávanie súborov na serveroch } \\ \\
+	Aplikácie bude vyhľadávať súbory na serveroch, ktoré obsahujú dáta o molekulách, z meracích zariadení.
+	\item { \bf Analýza nájdených súborov } \\ \\
+	Aplikácia bude analyzovať nájdené súbory, resp. bude zisťovať či majú požadovanú štruktúru na ďalšie spracovanie.
+	\item { \bf Spracovanie údajov z nájdených súborov } \\ \\
+	Aplikácia bude vedieť spracovať dáta z nájdených súborov 
+	\item { \bf Uloženie údajov do databázy }\\ \\
+	Aplikácia bude vedieť uložiť spracované dáta prehľadne do databázy
+	\item { \bf Aktualizovanie atabázy o novopridané súbory } \\ \\
+	Aplikácia bude v pravidelných časových intervaloch, alebo na vyžiadanie používateľa,  zisťovať prítomnosť novopridaných súborov, ktorých údaje ešte nie sú uložené v databáze a aktualizovať databázu o nové údaje.
+	\item { \bf  Webové používateľské rozhranie }
+	Aplikácia bude ovládaná pomocou jednoduchého webového používateľského rozhrania.
+	\item { \bf Možnosť vykonávania operácii nad dátami v databáze }\\ \\
+	Aplikácia bude poskytovať nástroje na prácu s údajmi uloženými v databáze. Bude medzi nimi vedieť vyhľadávať podľa rôznych kritérii, zisťovať informácie o tom, či bola konkrétna molekula analyzovaná, resp. či sa nachádza v databáze. Keď nájde požadovanú molekulu, vypíše, akými metódami bola naalyzovaná, koľko krát bola analyzovaná a podobne.
+	\item { \bf Zabezpečenie aplikácie } \\ \\
+	Na prístup do aplikácie bude nutné prihlásenie svojim používateľkým menom a heslom. Používateľov bude môcť pridávať iba administrátor. 
+	
+\end{enumerate}
+
+\section{Dodatky}
+\begin{itemize}
+	\item item
+\end{itemize}
+
+\end{document}
+
