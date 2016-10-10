@@ -79,14 +79,10 @@ Vyhľadá súbory s dátatmi z meracích prístrojov na konkrétnych serveroch. 
 V pravidelných časových intervaloch, alebo na vyžiadanie používateľa, bude rozširovať databázu o dáta z novopridaných súborov. Aplikácia poskytne používateľovi jednoduché a intuitívne webové rozhranie, v ktorom bude možné vykonávať požadované operácie nad dátami z databázy, ako je napríklad pokročilé vyhľadávanie na základe rôznych kritérii či možnosť jednoduchécho vykreslenia molekuly na základe údajov z databázy. Webové rozhranie bude vedieť poskytnúť informácie o určitej molekule, či bola niekedy analyzovaná, akými metódami bola analyzovaná a podobne. Na prácu s aplikáciou postačí pripojenie na internet a webový prehliadač. Aplikácia bude chránená heslom a každý používateľ bude mať svoje prihlasovacie údaje, ktoré bude možné zmeniť. Nových používateľov bude mocť pridávať iba administrátor.
 
 \subsection{Charakteristika používateľov}
-\begin{itemize}
-	\item item
-\end{itemize}
+Aplikácia je určená pre chemikov a fyzikov, ktorí pracujú s veľkým množstvom dát z meracích prístrojov a potrebujú v nich mať poriadok. Zákazníci sú profesionálni chemici a fyzici, ktorí potrebujú nástroj, ktorý by im zjednodušil prácu s dátami analyzovaných molekúl.
 
 \subsection{Všeobecné obmedzenia}
-\begin{itemize}
-	\item item
-\end{itemize}
+Aplikácia je robená na mieru, takže nemôže si hocikto vytvoriť účet a používať ju. Používateľské kontá môže vytvárať iba administrátor. Na využívanie aplikácie je potrebné mať prístup k internetu a webový prehliadač. Webové rozhranie zobrazuje molekuly, ktoré má uložené v databáze. Ak je výpočet pre nejakú molekulu neúplný alebo chybný, potom danú molekulu nebude možné zobraziť. Objaví sa iba upozornenie, že dáta z výpočtu nie sú validné. Ak hľadaná molekula neexistuje v databáze, používateľ má možnosť nahrať súbor s výpočtom pre danú molekulu a v nasledujúcom vyhľadávaní, údaje o molekule budú zobrazené.
 
 \section{Predpoklady a závislosti}
 Grafické užívateľské prostredie bude po otvorení webstránky s aplikáciou v úvode pozostávať z prihlasovacieho formuláru tvoreného textovými poľami, určenými pre zadanie používateľského mena a používateľského hesla, slúžiacimi na identifikáciu jednotlivých vybraných používateľov a udelenie im prislúchajúcich právomocí. Po prihlásení bude používateľovi zobrazený aktuálny výpis údajov obsiahnutých v databáze, ako aj prvky ovládačov, slúžiacich 
