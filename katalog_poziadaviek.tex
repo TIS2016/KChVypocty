@@ -56,26 +56,24 @@ Bonusovou funkcionalitou bude grafické zobrazenie jednotlivých analyzovaných 
 
 \subsection{Odkazy}
 \begin{itemize}
-	\item item
+	\item Priklad zobrazenia spracovaných dát: \ \url{http://neon.dpp.fmph.uniba.sk/qch_calcs/index.php}
 \end{itemize}
 
 \subsection{Prehľad zostávajucej časti dokumentu}
 V nasledujúcich kapitolách nájdete rozširujúce informácie o projekte.
-Všeobecný popis projektu, perspektívu projektu, podrobný popis funkcionality, účel projektu, charakteristiku cieľových používateľov projektu a iné.
+Všeobecný popis projektu, perspektívu projektu, podrobný popis funkcionality, účel projektu, charakteristiku cieľových používateľov projektu a ďaľšie.
 
 
 \section{Všeobecný popis}
-Výsledná aplikácia bude spravovať a prehľadávať databázu, obsahujúcu kvantovo-chemické výpočty a bude pravidelne aktualizovaná automaticky alebo manuálne na vyžiadanie samotného používateľa. Aplikácia bude prístupná len vybraným používateľom, ktorým bude pridelené ich vlastné prihlasovacie 
-meno a heslo. Každému z používateľov bude zároveň prístupný celý obsah databázy, teda obsah spravovaný každým z jednotlivých používateľov. Samotná aplikácia sa bude vyznačovať vysokou prenosnosťou vzhľadom na nulovú veľkosť a z toho vyplývajúce nulové požiadavky na dostupnú kapacitu pamäte, s dôrazom na vysokú dostupnosť vyplývajúcu z prístupu cez príslušnú webstránku.
+Výsledná aplikácia bude spravovať a prehľadávať databázu, obsahujúcu výsledky kvantovo-chemických výpočtov a bude pravidelne aktualizovaná automaticky alebo manuálne na vyžiadanie samotného používateľa. Aplikácia bude prístupná len vybraným používateľom, ktorým bude pridelené ich vlastné prihlasovacie meno a heslo. Každému z používateľov bude zároveň prístupný celý obsah databázy, teda obsah spravovaný každým z jednotlivých používateľov. Samotná aplikácia sa bude vyznačovať vysokou prenosnosťou vzhľadom na nulovú veľkosť a z toho vyplývajúce nulové požiadavky na dostupnú kapacitu pamäte, s dôrazom na vysokú dostupnosť vyplývajúcu z prístupu cez príslušnú webstránku.
 
-\subsection{Perspektíva projektu}
-\begin{itemize}
-	\item item
-\end{itemize}
+\subsection{Perspektívny pohľad na projekt}
+Projekt bude mať otvorený zdrojový kód. Bude bežať na linuxovom serveri a bude poskytovať webové rozhranie.
+
 
 \subsection{Funkcionalita výslednej aplikácie}
 Výsledná aplikácia bude pracovať nasledujúcim spôsobom: \
-Vyhľadá súbory s dátatmi z meracích prístrojov na konkrétnych serveroch. Dáta zo súborov najskôr analyzuje, potom spracuje a uloží ich do databázy.
+Vyhľadá súbory s výsledkami výpočtov z meracích prístrojov, ktoré sú uložené na konkrétnych serveroch. Dáta zo súborov najskôr analyzuje, potom spracuje a uloží ich do databázy.
 V pravidelných časových intervaloch, alebo na vyžiadanie používateľa, bude rozširovať databázu o dáta z novopridaných súborov. Aplikácia poskytne používateľovi jednoduché a intuitívne webové rozhranie, v ktorom bude možné vykonávať požadované operácie nad dátami z databázy, ako je napríklad pokročilé vyhľadávanie na základe rôznych kritérii či možnosť jednoduchécho vykreslenia molekuly na základe údajov z databázy. Webové rozhranie bude vedieť poskytnúť informácie o určitej molekule, či bola niekedy analyzovaná, akými metódami bola analyzovaná a podobne. Na prácu s aplikáciou postačí pripojenie na internet a webový prehliadač. Aplikácia bude chránená heslom a každý používateľ bude mať svoje prihlasovacie údaje, ktoré bude možné zmeniť. Nových používateľov bude mocť pridávať iba administrátor.
 
 \subsection{Charakteristika používateľov}
@@ -84,21 +82,21 @@ Aplikácia je určená pre chemikov a fyzikov, ktorí pracujú s veľkým množs
 \subsection{Všeobecné obmedzenia}
 Aplikácia je robená na mieru, takže nemôže si hocikto vytvoriť účet a používať ju. Používateľské kontá môže vytvárať iba administrátor. Na využívanie aplikácie je potrebné mať prístup k internetu a webový prehliadač. Webové rozhranie zobrazuje molekuly, ktoré má uložené v databáze. Ak je výpočet pre nejakú molekulu neúplný alebo chybný, potom danú molekulu nebude možné zobraziť. Objaví sa iba upozornenie, že dáta z výpočtu nie sú validné. Ak hľadaná molekula neexistuje v databáze, používateľ má možnosť nahrať súbor s výpočtom pre danú molekulu a v nasledujúcom vyhľadávaní, údaje o molekule budú zobrazené.
 
-\section{Predpoklady a závislosti}
+\subsection{Predpoklady a závislosti}
 Grafické užívateľské prostredie bude po otvorení webstránky s aplikáciou v úvode pozostávať z prihlasovacieho formuláru tvoreného textovými poľami, určenými pre zadanie používateľského mena a používateľského hesla, slúžiacimi na identifikáciu jednotlivých vybraných používateľov a udelenie im prislúchajúcich právomocí. Po prihlásení bude používateľovi zobrazený aktuálny výpis údajov obsiahnutých v databáze, ako aj prvky ovládačov, slúžiacich 
 na prácu s vybranými dátami, podľa bližšie špecifikovaných požiadaviek zadávateľa, zahŕňajúc jednoduchú správu jednotlivých používateľov alebo vybraného používateľa.
 
 \section{Zoznam špecifických požiadaviek na systém}
 \begin{enumerate}[label={[\arabic*]}]
 	\item { \bf Vyhľadávanie súborov na serveroch } \\ \\
-	Aplikácie bude vyhľadávať súbory na serveroch, ktoré obsahujú dáta o molekulách, z meracích zariadení.
+	Aplikácie bude vyhľadávať súbory na serveroch, ktoré obsahujú výsledky výpočtov z meracích zariadení. Tieto súbory bude ďalej spracovávať. Konkrétne miesta vyhľaávania budú špecifikované v konfiguračných súboroch.
 	\item { \bf Analýza nájdených súborov } \\ \\
-	Aplikácia bude analyzovať nájdené súbory, resp. bude zisťovať či majú požadovanú štruktúru na ďalšie spracovanie.
+	Aplikácia bude analyzovať nájdené súbory, resp. bude zisťovať či majú validnú štruktúru, vhodnú k ďalšiemu spracovaniu.
 	\item { \bf Spracovanie údajov z nájdených súborov } \\ \\
-	Aplikácia bude vedieť spracovať dáta z nájdených súborov 
+	Aplikácia bude vedieť spracovať dáta z nájdených súborov do vhodného formátu, aby ich bolo možné ľahko uložiť do databázy. 
 	\item { \bf Uloženie údajov do databázy }\\ \\
-	Aplikácia bude vedieť uložiť spracované dáta prehľadne do databázy
-	\item { \bf Aktualizovanie atabázy o novopridané súbory } \\ \\
+	Aplikácia bude vedieť uložiť spracované dáta prehľadne do databázy. S dátami v databáze sa bude dať ďalej pracovať.
+	\item { \bf Aktualizovanie databázy o novopridané súbory } \\ \\
 	Aplikácia bude v pravidelných časových intervaloch, alebo na vyžiadanie používateľa,  zisťovať prítomnosť novopridaných súborov, ktorých údaje ešte nie sú uložené v databáze a aktualizovať databázu o nové údaje.
 	\item { \bf  Webové používateľské rozhranie }
 	Aplikácia bude ovládaná pomocou jednoduchého webového používateľského rozhrania.
@@ -111,7 +109,7 @@ na prácu s vybranými dátami, podľa bližšie špecifikovaných požiadaviek 
 
 \section{Dodatky}
 \begin{itemize}
-	\item item
+	\item zatiaľ žiadne
 \end{itemize}
 
 \end{document}
