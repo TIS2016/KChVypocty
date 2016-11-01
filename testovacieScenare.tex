@@ -1,0 +1,37 @@
+\documentclass[12pt,a4paper, draft]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage{lmodern}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+
+\usepackage{enumitem}
+
+\renewcommand{\labelenumii}{\theenumii}
+\renewcommand{\theenumii}{\theenumi.\arabic{enumii}.}
+
+\begin{document}
+
+\section*{Testovacie scenáre}
+\subsection*{Existencia súboru}
+Otestovať existenciu súboru a jeho korektné otvorenie. Ak funkcia dosta\-ne cestu korektného súboru, so súborom sa dá ďalej pokračovať, v opačnom prípade funkcia súbor zahodí a nepokračuje sa v ďalšom spracovávaní.
+
+\subsection*{Crawler}
+Otestovať funkcionalitu Crawlera. Používateľ pridá nové súbory v používateľskom rozhraní. Crawler má nájsť novopridané súbory a aktualizovať databázu. 
+
+\subsection*{Validnosť súboru}
+Otestovať validitu súboru. Ak funkcia dostane validný súbor (je v požado\-vanom formáte), pokračuje sa ďalej v procese. V opačnom prípade ak funkcia dostane nevalidný vstup (súbor je v zlom formáte), ďalej sa nepokračuje a funkcia súbor zahodí.
+
+\subsection*{Rozlišovanie linuxových a windowsových súborov}
+Otestovať rozlišovanie medzi linuxovým a windowsovým súborom (rozdiel je v type súboru a v pár znakoch). Funkcia rozlíši, či dostala na vstup linu\-xový alebo windowsový súbor a následne sa súbor parsuje podľa linuxového alebo windowsového formátu.  
+
+\subsection*{Databáza}
+Otestovať pridávanie nových prvkov do databázy. Pridá sa nový korektný súbor a následne treba zistiť, či sa pridal aj do databázy. Pridá sa nový nekorektný súbor, následne treba skontrolovať, či sa údaje zo súboru nepridali do databázy.
+
+
+\end{document}
