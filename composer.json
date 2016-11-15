@@ -1,0 +1,9 @@
+{
+  "require": {"doctrine/orm": "v2.5.4"},
+
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/"
+    }
+  }
+}
