@@ -6,7 +6,7 @@ use Doctrine\ORM\Tools\Setup;
 $isDevMode = true;
 $entityFilesLocation = array('app/');
 
-// database configuration parameters
+// TODO treba zmenit udaje do vasej vlastnej databazy
 $conn = array(
     'driver' => 'pdo_mysql',
     'user' => 'root',
