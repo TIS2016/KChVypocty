@@ -34,4 +34,16 @@ class Calculation
     /** @Column(type="string") **/
     protected $path;
 
+
+    /**
+     * @OneToMany(targetEntity="Coordinate", mappedBy="calculation")
+     */
+    private $coordinates;
+
+
+    public function __construct(){
+        $this->coordinates = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+
 }
