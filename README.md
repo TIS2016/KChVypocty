@@ -1,0 +1,1 @@
+# Zápisnice zo stretnutí
