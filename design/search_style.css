@@ -1,0 +1,30 @@
+body {
+    background-image:url("background.png");
+    font-family:"Helvetica Neue";
+}
+
+form {
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+}
+
+input {
+    outline:none;
+    border:none;
+    background-color:rgba(160,160,160,0.3);
+    border-radius:8px;
+    padding:5px;
+    font-size:15pt;
+    height:40px;
+}
+
+input[type="search"] {
+    -webkit-appearance: none;
+    width:500px;
+}
+
+input[type="submit"] {
+    width:40px;
+}
