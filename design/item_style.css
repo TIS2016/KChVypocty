@@ -1,0 +1,29 @@
+body {
+    background-image:url("background.png");
+    font-family:"Helvetica Neue";
+}
+
+table {
+    border-collapse:collapse;
+}
+
+td, th {
+    border:1px solid #ddd;
+    padding:8px;
+}
+
+tr {
+    background-color:#f2f2f2;
+}
+
+tr:hover {
+    background-color:#ddd;
+}
+
+th {
+    padding-top:12px;
+    padding-bottom:12px;
+    text-align:left;
+    background-color:#A0A0A0;
+    color:white;
+}
