@@ -1,5 +1,5 @@
 <?php
-
+namespace App\Db;
 
 /**
  * @Entity @Table(name="users")
