@@ -6,7 +6,9 @@
 
   "autoload": {
     "psr-4": {
-      "App\\": "app/"
+      "App\\": "app/",
+      "App\\Db\\": "app/database_entities/",
+      "AjaxLiveSearch\\core\\": "app/views/core"
     }
   }
 }

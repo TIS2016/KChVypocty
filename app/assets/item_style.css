@@ -1,6 +1,6 @@
 body {
-    background-image:url("background.png");
-    font-family:"Helvetica Neue";
+    background-image:url("images/background.png");
+    font-family: "Helvetica Neue", serif;
 }
 
 table {
