@@ -1,5 +1,4 @@
 <?php
-namespace Setup;
 require_once "vendor/autoload.php";
 
 use Doctrine\ORM\EntityManager;
