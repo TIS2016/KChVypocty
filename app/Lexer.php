@@ -4,9 +4,10 @@ namespace App;
 
 
 class Lexer {
-    private $file;
+    private $path;
     private $errorMessage;
     private $specialCharacter;
+    private $file;
 
     const LINUX_FILE_EXTENSION = "log";
     const WINDOWS_FILE_EXTENSION = "out";
@@ -14,8 +15,8 @@ class Lexer {
     const LINUX_FILE_TYPE_CHARACTER = "\\";
     const WINDOWS_FILE_TYPE_CHARACTER = "|";
 
-    public function __construct($file) {
-        $this->file = $file;
+    public function __construct($path) {
+        $this->path = $path;
         $this->setDefaultValues();
     }
 
@@ -45,7 +46,7 @@ class Lexer {
     }
 
     private function isNotValidFileExtension() {
-        $extension = pathinfo($this->file, PATHINFO_EXTENSION);
+        $extension = pathinfo($this->path, PATHINFO_EXTENSION);
         if ($this->isLinuxFile($extension)){
             $this->specialCharacter = Lexer::LINUX_FILE_TYPE_CHARACTER;
             return false;
@@ -56,9 +57,18 @@ class Lexer {
         return true;
     }
 
+    private function alreadyExists() {
+        $entityManager = \App\DoctrineSetup::getEntityManager();
+        $dql = "SELECT history FROM \App\Db\History history WHERE history.path=?1";
+        $history = $entityManager->createQuery($dql)
+            ->setParameter(1, $this->path)
+            ->getResult();
+        return (count($history) > 0);
+    }
 
-    public function readFile() {
-        $fileContent = file_get_contents($this->file);
+    private function readFile() {
+        $fileContent = file_get_contents($this->path);
+        $this->file = $fileContent;
         $calculations = array();
 
         $startSequence = '1' . $this->specialCharacter . '1' . $this->specialCharacter;
@@ -73,8 +83,19 @@ class Lexer {
             $startIndex = strpos($fileContent, $startSequence);
             $endIndex = strpos($fileContent, $endSequence);
         }
-
         return $calculations;
+    }
+
+    public function getSpecialCharacter() {
+        return $this->specialCharacter;
+    }
+
+    public function getPath() {
+        return $this->path;
+    }
+
+    public function getFile() {
+        return $this->file;
     }
 
     public function getCalculations(){
@@ -87,8 +108,13 @@ class Lexer {
             return [];
         }
 
-        if (!file_exists($this->file)){
+        if (!file_exists($this->path)){
             $this->setErrorMessage("File does not exists!");
+            return [];
+        }
+
+        if ($this->alreadyExists()) {
+            $this->setErrorMessage("File is already processed in database.");
             return [];
         }
 
@@ -100,6 +126,5 @@ class Lexer {
 
         return $calculationsData;
     }
-
 
 }

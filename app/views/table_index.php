@@ -100,7 +100,8 @@ $data = Presenter::getTableData();
                 <th><?= $calculation->getBasisSet() ?></th>
                 <th><?= $calculation->getStechiometry() ?></th>
                 <th><?= $calculation->getUser() ?></th>
-                <th><?= $calculation->getDate()->format('Y-m-d') ?></th>
+
+                <th><?= $calculation->getDate()?></th>
                 <th><?= $calculation->getServer()  ?></th>
                 <th><?= $calculation->getPath() ?></th>
                 <th><input data-item-id="<?= $calculation->getCalculationID() ?>" class="show_info" type="button" value="Show details"></th>

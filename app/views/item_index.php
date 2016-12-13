@@ -51,7 +51,7 @@ $information = Presenter::getCalculationData($id);
         </tr>
         <tr>
             <th>Date</th>
-            <td><?= $information->getDate()->format('Y-m-d') ?></td>
+            <td><?= $information->getDate() ?></td>
         </tr>
         <tr>
             <th>Server</th>
@@ -61,6 +61,24 @@ $information = Presenter::getCalculationData($id);
             <th>Path</th>
             <td><?= $information->getPath() ?></td>
         </tr>
+
+        <tr>
+            <th>InfoInput</th>
+            <td><?= $information->getInfoInput() ?></td>
+        </tr>
+        <tr>
+            <th>InfoEnd</th>
+            <td><?= $information->getInfoEnd() ?></td>
+        </tr>
+        <tr>
+            <th>Energy</th>
+            <td><?= $information->getEnergy() ?></td>
+        </tr>
+        <tr>
+            <th>Thermochemistry</th>
+            <td><?= $information->getThermoChemistry() ?></td>
+        </tr>
+
     </table>
 </body>
 </html>

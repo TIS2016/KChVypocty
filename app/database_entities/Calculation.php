@@ -5,8 +5,8 @@ namespace App\Db;
  * @Entity @Table(name="calculations")
  *
  **/
-class Calculation
-{
+class Calculation {
+
     /** @Id @Column(type="integer") @GeneratedValue **/
     protected $calculationID;
 
@@ -24,6 +24,28 @@ class Calculation
 
     /** @Column(type="string") **/
     protected $user;
+
+    /** @Column(type="string") **/
+    protected $date;
+
+    /** @Column(type="string") **/
+    protected $server;
+
+    /** @Column(type="string") **/
+    protected $path;
+
+    /** @Column(type="string") **/
+    protected $infoInput;
+
+    /** @Column(type="string") **/
+    protected $infoEnd;
+
+    /** @Column(type="string") **/
+    protected $energy;
+
+    /** @Column(type="string") **/
+    protected $thermoChemistry;
+
 
     /**
      * @return mixed
@@ -185,25 +207,83 @@ class Calculation
         $this->coordinates = $coordinates;
     }
 
-    /** @Column(type="date") **/
-    protected $date;
 
-    /** @Column(type="string") **/
-    protected $server;
+    /**
+     * @return mixed
+     */
+    public function getInfoInput()
+    {
+        return $this->infoInput;
+    }
 
-    /** @Column(type="string") **/
-    protected $path;
+    /**
+     * @param mixed $infoInput
+     */
+    public function setInfoInput($infoInput)
+    {
+        $this->infoInput = $infoInput;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getInfoEnd()
+    {
+        return $this->infoEnd;
+    }
+
+    /**
+     * @param mixed $infoEnd
+     */
+    public function setInfoEnd($infoEnd)
+    {
+        $this->infoEnd = $infoEnd;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEnergy()
+    {
+        return $this->energy;
+    }
+
+    /**
+     * @param mixed $energy
+     */
+    public function setEnergy($energy)
+    {
+        $this->energy = $energy;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getThermoChemistry()
+    {
+        return $this->thermoChemistry;
+    }
+
+    /**
+     * @param mixed $thermoChemistry
+     */
+    public function setThermoChemistry($thermoChemistry)
+    {
+        $this->thermoChemistry = $thermoChemistry;
+    }
 
 
     /**
-     * @OneToMany(targetEntity="Coordinate", mappedBy="calculation")
+     * @OneToMany(targetEntity="Coordinate", mappedBy="calculation", cascade="persist")
      */
     private $coordinates;
+
 
 
     public function __construct(){
         $this->coordinates = new \Doctrine\Common\Collections\ArrayCollection();
     }
+
 
 
 }

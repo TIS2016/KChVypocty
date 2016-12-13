@@ -12,6 +12,18 @@ class Coordinate {
     /** @Id @Column(type="integer") @GeneratedValue **/
     protected $pointCoordinateId;
 
+    /** @Column(type="string") **/
+    protected $atom;
+
+    /** @Column(type="float") **/
+    protected $x;
+
+    /** @Column(type="float") **/
+    protected $y;
+
+    /** @Column(type="float") **/
+    protected $z;
+
     /**
      * @return mixed
      */
@@ -26,6 +38,22 @@ class Coordinate {
     public function setPointCoordinateId($pointCoordinateId)
     {
         $this->pointCoordinateId = $pointCoordinateId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAtom()
+    {
+        return $this->atom;
+    }
+
+    /**
+     * @param mixed $x
+     */
+    public function setAtom($atom)
+    {
+        $this->atom = $atom;
     }
 
     /**
@@ -63,6 +91,23 @@ class Coordinate {
     /**
      * @return mixed
      */
+    public function getZ()
+    {
+        return $this->z;
+    }
+
+    /**
+     * @param mixed $y
+     */
+    public function setZ($z)
+    {
+        $this->z = $z;
+    }
+
+
+    /**
+     * @return mixed
+     */
     public function getCalculation()
     {
         return $this->calculation;
@@ -76,11 +121,6 @@ class Coordinate {
         $this->calculation = $calculation;
     }
 
-    /** @Column(type="decimal") **/
-    protected $x;
-
-    /** @Column(type="decimal") **/
-    protected $y;
 
     /**
      * @ManyToOne(targetEntity="Calculation", inversedBy="coordinates")
