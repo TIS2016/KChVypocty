@@ -28,7 +28,7 @@ class Crawler {
                     }
                 }
 
-                preg_match("/" . $this->windowsFileExtension . "/", $file, $out);
+                preg_match("/" . $this->linuxFileExtension . "/", $file, $out);
                 if (sizeof($out) != 0) {
                     if (basename($file) != "." && basename($file) != "..") {
                         array_push($this->filePaths, $filename);

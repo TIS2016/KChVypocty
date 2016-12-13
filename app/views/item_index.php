@@ -21,7 +21,7 @@ $information = Presenter::getCalculationData($id);
 <html>
 <head>
     <title>Item</title>
-    <link rel="stylesheet" type="text/css" href="/app/assets/item_style.css">
+    <link rel="stylesheet" type="text/css" href="/tis/app/assets/item_style.css">
 </head>
 <body>
     <table>

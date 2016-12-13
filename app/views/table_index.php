@@ -92,19 +92,35 @@ $data = Presenter::getTableData();
 <!--    </form>-->
     <input type="text" class='mySearch' id="ls_query" placeholder="Type to start searching ...">
     <table>
-        <?php foreach ($data as /* @var Calculation */ $calculation ): ?>
-            <tr>
-                <th><?= $calculation->getCalculationID() ?></th>
-                <th><?= $calculation->getJobType() ?></th>
-                <th><?= $calculation->getMethod() ?></th>
-                <th><?= $calculation->getBasisSet() ?></th>
-                <th><?= $calculation->getStechiometry() ?></th>
-                <th><?= $calculation->getUser() ?></th>
+        <tr>
 
-                <th><?= $calculation->getDate()?></th>
-                <th><?= $calculation->getServer()  ?></th>
-                <th><?= $calculation->getPath() ?></th>
-                <th><input data-item-id="<?= $calculation->getCalculationID() ?>" class="show_info" type="button" value="Show details"></th>
+            <th>Id</th>
+            <th>Job Type</th>
+            <th>Method</th>
+            <th>Basis Set</th>
+            <th>Stechiometry</th>
+            <th>User</th>
+            <th>Date</th>
+            <th>Server</th>
+            <th>Path</th>
+            <th>Show info</th>
+
+        </tr>
+        <?php foreach ($data as /* @var Calculation */ $calculation ): ?>
+
+
+            <tr>
+                <td><?= $calculation->getCalculationID() ?></td>
+                <td><?= $calculation->getJobType() ?></td>
+                <td><?= $calculation->getMethod() ?></td>
+                <td><?= $calculation->getBasisSet() ?></td>
+                <td><?= $calculation->getStechiometry() ?></td>
+                <td><?= $calculation->getUser() ?></td>
+
+                <td><?= $calculation->getDate()?></td>
+                <td><?= $calculation->getServer()  ?></td>
+                <td><?= $calculation->getPath() ?></td>
+                <td><input data-item-id="<?= $calculation->getCalculationID() ?>" class="show_info" type="button" value="Show details"></td>
             </tr>
         <?php endforeach; ?>
     </table>
@@ -154,7 +170,7 @@ $data = Presenter::getTableData();
 //                console.log(data);
 //            }, requestData);
 
-            window.location.href = "/app/views/item_index.php?item_id=" + selectedOne;
+            window.location.href = "/tis/app/views/item_index.php?item_id=" + selectedOne;
         },
         onResultEnter: function(e, data) {
              jQuery("#ls_query").trigger('ajaxlivesearch:search', {query: 'test'});
@@ -166,6 +182,6 @@ $data = Presenter::getTableData();
 
     $(".show_info").on("click", function (e) {
         var id = $(this).attr('data-item-id');
-        window.location.href = "/app/views/item_index.php?item_id=" + id;
+        window.location.href = "/tis/app/views/item_index.php?item_id=" + id;
     });
 </script>
