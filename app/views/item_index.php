@@ -61,6 +61,7 @@ $information = Presenter::getCalculationData($id);
             <th>Path</th>
             <td><?= $information->getPath() ?></td>
         </tr>
+
         <tr>
             <th>InfoInput</th>
             <td><?= $information->getInfoInput() ?></td>
@@ -77,6 +78,7 @@ $information = Presenter::getCalculationData($id);
             <th>Thermochemistry</th>
             <td><?= $information->getThermoChemistry() ?></td>
         </tr>
+
     </table>
 </body>
 </html>
