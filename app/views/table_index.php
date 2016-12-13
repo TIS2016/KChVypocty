@@ -100,6 +100,7 @@ $data = Presenter::getTableData();
                 <th><?= $calculation->getBasisSet() ?></th>
                 <th><?= $calculation->getStechiometry() ?></th>
                 <th><?= $calculation->getUser() ?></th>
+
                 <th><?= $calculation->getDate()?></th>
                 <th><?= $calculation->getServer()  ?></th>
                 <th><?= $calculation->getPath() ?></th>

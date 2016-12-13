@@ -21,7 +21,7 @@ class Config
                 'host'               => 'localhost',
                 'database'           => 'tis',
                 'username'           => 'root',
-                'unix_socket' => '/opt/lampp/var/mysql/mysql.sock',
+                'pass'               => 'root',
                 'table'              => 'calculations',
                 // specify the name of search columns
                 'searchColumns'      => ['jobType', 'method', 'basisSet', 'stechiometry', 'user', 'date', 'server'],
