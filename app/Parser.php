@@ -5,6 +5,7 @@ namespace App;
 use App\Db\Calculation;
 use App\Db\Coordinate;
 use App\Db\History;
+use Symfony\Polyfill\Mbstring\Mbstring;
 
 class Parser {
     private $calculations;
@@ -61,6 +62,7 @@ class Parser {
         $calculation = $body[0];
         $parseBody = $body[1];
 
+        //TODO nemusi fungovat v kazdom pripade
         $coordinates = $this->parseCoordinates($calculation, $tokenArray[1]);
         $calculation = $coordinates[0];
         $parseCoordinates = $coordinates[1];

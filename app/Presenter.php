@@ -14,5 +14,14 @@ class Presenter {
         return $calculationRepo->find($id);
     }
 
+
+
+    public static function run(){
+
+
+
+
+    }
+
 }
 

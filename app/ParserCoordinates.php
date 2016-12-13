@@ -91,10 +91,10 @@ class ParserCoordinates {
         $this->coordinates = array();
         $coordinate = array();
         for ($i = 0; $i < count($coord); $i++) {
-            if (($i - 1) % 6 == 0) {
+            if ($this->filterAtom($i)) {
                 $coord[$i] = $this->getAtomFromPeriodicTable($coord[$i]);
             }
-            if (($i % 6 != 0) && (($i - 2) % 6 != 0)) {
+            if ($this->filterUnnecessary($i)) {
                 array_push($coordinate, $coord[$i]);
             }
         }
@@ -110,6 +110,14 @@ class ParserCoordinates {
                 array_push($this->coordinates, $row);
             }
         }
+    }
+
+    private function filterUnnecessary($i){
+        return ($i % 6 != 0) && (($i - 2) % 6 != 0);
+    }
+
+    private function filterAtom($i) {
+        return ($i - 1) % 6 == 0;
     }
 
     private function getZMatrixOrientation() {

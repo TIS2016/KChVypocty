@@ -1,6 +1,0 @@
-{
-  "crawler": {
-        "dir_name": "files/",
-        "file_end_name": ".txt"
-      }
-}
