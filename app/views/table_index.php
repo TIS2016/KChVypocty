@@ -26,122 +26,117 @@ $data = Presenter::getTableData();
 <html lang="en">
 <head>
     <title>Table</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <script type="text/javascript" src="/tis/app/assets/bootstrap/js/bootstrap.js"></script>
     <link rel="stylesheet" type="text/css" href="../assets/table_style.css">
     <link rel="stylesheet" type="text/css" href="css/ajaxlivesearch.min.css">
     <script src="js/jquery-1.11.1.min.js"></script>
     <script src="js/ajaxlivesearch.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/tis/app/assets/item_style.css">
 
+    <style>
+
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 4px 8px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            -webkit-transition-duration: 0.4s; /* Safari */
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+
+        .button-run {
+            background-color: white;
+            color: black;
+            border: 2px solid #e7e7e7;
+            float: right;
+        }
+
+        .button-run:hover {background-color: #e7e7e7;}
+
+        .center {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        
+    </style>
 
 </head>
 <body>
-<!--    <form>-->
-<!--        <select>-->
-<!--            <option value="">Select job type</option>-->
-<!--            <option value="B">B</option>-->
-<!--            <option value="L">L</option>-->
-<!--            <option value="A">A</option>-->
-<!--        </select>-->
-<!--        <select>-->
-<!--            <option value="">Select method</option>-->
-<!--            <option value="B">B</option>-->
-<!--            <option value="L">L</option>-->
-<!--            <option value="A">A</option>-->
-<!--        </select>-->
-<!--        <select>-->
-<!--            <option value="">Select basis set</option>-->
-<!--            <option value="B">B</option>-->
-<!--            <option value="L">L</option>-->
-<!--            <option value="A">A</option>-->
-<!--        </select>-->
-<!--        <select>-->
-<!--            <option value="">Select stechiometry</option>-->
-<!--            <option value="B">B</option>-->
-<!--            <option value="L">L</option>-->
-<!--            <option value="A">A</option>-->
-<!--        </select>-->
-<!--        <select>-->
-<!--            <option value="">Select user</option>-->
-<!--            <option value="B">B</option>-->
-<!--            <option value="L">L</option>-->
-<!--            <option value="A">A</option>-->
-<!--        </select>-->
-<!--        <select>-->
-<!--            <option value="">Select date</option>-->
-<!--            <option value="B">B</option>-->
-<!--            <option value="L">L</option>-->
-<!--            <option value="A">A</option>-->
-<!--        </select>-->
-<!--        <select>-->
-<!--            <option value="">Select server</option>-->
-<!--            <option value="B">B</option>-->
-<!--            <option value="L">L</option>-->
-<!--            <option value="A">A</option>-->
-<!--        </select>-->
-<!--        <select>-->
-<!--            <option value="">Select path</option>-->
-<!--            <option value="B">B</option>-->
-<!--            <option value="L">L</option>-->
-<!--            <option value="A">A</option>-->
-<!--        </select>-->
-<!---->
-<!--        <br>-->
-<!--        <br>-->
-<!---->
-<!--      -->
-<!---->
-<!--    </form>-->
-    <input type="text" class='mySearch' id="ls_query" placeholder="Type to start searching ...">
-    <table>
-        <tr>
+    <div>
+        <button class="button button-run" >Logout</button>
+    </div>
+    <div>
+        <button class="button button-run" onclick="run()">Run</button>
+    </div>
 
-            <th>Id</th>
-            <th>Job Type</th>
-            <th>Method</th>
-            <th>Basis Set</th>
-            <th>Stechiometry</th>
-            <th>User</th>
-            <th>Date</th>
-            <th>Server</th>
-            <th>Path</th>
-            <th>Show info</th>
+    <div class="search">
+        <input type="text" class='mySearch' id="ls_query" placeholder="Type to start searching ...">
+    </div>
 
-        </tr>
-        <?php foreach ($data as /* @var Calculation */ $calculation ): ?>
+    <div class="container-fluid">
+        <div class="row center">
+            <div class="col-md-12">
+                <table align="center">
+                    <tr class="table-row">
+                        <th class="table-header">Id</th>
+                        <th class="table-header">Job Type</th>
+                        <th class="table-header">Method</th>
+                        <th class="table-header">Basis Set</th>
+                        <th class="table-header">Stechiometry</th>
+                        <th class="table-header">User</th>
+                        <th class="table-header">Date</th>
+                        <th class="table-header">Server</th>
+                        <th class="table-header">Path</th>
+                        <th class="table-header">Show info</th>
 
+                    </tr>
+                    <?php foreach ($data as $calculation ): ?>
+                        <tr class="table-row">
+                            <td class="table-column"><?= $calculation->getCalculationID() ?></td>
+                            <td class="table-column"><?= $calculation->getJobType() ?></td>
+                            <td class="table-column"><?= $calculation->getMethod() ?></td>
+                            <td class="table-column"><?= $calculation->getBasisSet() ?></td>
+                            <td class="table-column"><?= $calculation->getStechiometry() ?></td>
+                            <td class="table-column"><?= $calculation->getUser() ?></td>
+                            <td class="table-column"><?= $calculation->getDate()?></td>
+                            <td class="table-column"><?= $calculation->getServer()  ?></td>
+                            <td class="table-column"><?= $calculation->getPath() ?></td>
+                            <td class="table-column"><input data-item-id="<?= $calculation->getCalculationID() ?>" class="show_info" type="button" value="Show details"></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+            </div>
+        </div>
+    </div>
 
-            <tr>
-                <td><?= $calculation->getCalculationID() ?></td>
-                <td><?= $calculation->getJobType() ?></td>
-                <td><?= $calculation->getMethod() ?></td>
-                <td><?= $calculation->getBasisSet() ?></td>
-                <td><?= $calculation->getStechiometry() ?></td>
-                <td><?= $calculation->getUser() ?></td>
-
-                <td><?= $calculation->getDate()?></td>
-                <td><?= $calculation->getServer()  ?></td>
-                <td><?= $calculation->getPath() ?></td>
-                <td><input data-item-id="<?= $calculation->getCalculationID() ?>" class="show_info" type="button" value="Show details"></td>
-            </tr>
-        <?php endforeach; ?>
-    </table>
 </body>
 </html>
 
 <script>
 
-    function sendAjaxRequest(callBackFunction, data) {
-        var requestPath = "/app/ajax/ajax_handler.php";
-        var responseData = "";
+    function run(){
+        sendAjaxRequest(function(responseData){
+            console.log(responseData);
+        });
+    }
 
+    function sendAjaxRequest(callBackFunction) {
+        var requestPath = "/tis/app/ajax/ajax_handler.php";
+        var responseData = "";
         $.ajax({
             url: requestPath,
             type: 'post',
-            dataType: 'json',
+            dataType: 'text',
             success: function (data) {
                 callBackFunction(data);
-            },
-            data: {
-                calculation_id: data.calculation_id
             }
         });
 

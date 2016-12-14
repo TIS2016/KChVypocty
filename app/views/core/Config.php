@@ -20,8 +20,8 @@ class Config
             'ls_query' => [
                 'host'               => 'localhost',
                 'database'           => 'tis',
-                'username'           => 'root',
-                'pass'               => 'root',
+                'username'           => 'tis',
+                'pass'               => 'TiS2016',
                 'table'              => 'calculations',
                 // specify the name of search columns
                 'searchColumns'      => ['jobType', 'method', 'basisSet', 'stechiometry', 'user', 'date', 'server'],
@@ -33,7 +33,7 @@ class Config
                  * filter the result by entering table column names
                  * to get all the columns, remove filterResult or make it an empty array
                  */
-                'filterResult'       => [],
+                'filterResult'       => ['calculationID', 'jobType', 'method', 'basisSet', 'stechiometry'],
                 /**
                  * specify search query comparison operator.
                  * possible values for comparison operators are: 'LIKE' and '='. this is required

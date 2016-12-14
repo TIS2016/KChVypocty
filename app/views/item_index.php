@@ -14,7 +14,9 @@ $id = 0;
 if (isset($_GET['item_id']))
     $id = $_GET['item_id'];
 
+
 $information = Presenter::getCalculationData($id);
+
 ?>
 
 <!DOCTYPE>
@@ -31,64 +33,70 @@ $information = Presenter::getCalculationData($id);
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-4">
-            <table>
-                <tr>
-                    <th>ID</th>
-                    <td class="text-wrap"><?= $information->getCalculationID() ?></td>
-                </tr>
-                <tr>
-                    <th>Job type</th>
-                    <td class="text-wrap"><?= $information->getJobType() ?></td>
-                </tr>
-                <tr>
-                    <th>Method</th>
-                    <td class="text-wrap"><?= $information->getMethod() ?></td>
-                </tr>
-                <tr>
-                    <th>Basis set</th>
-                    <td class="text-wrap"><?= $information->getBasisSet() ?></td>
-                </tr>
-                <tr>
-                    <th>Stechiometry</th>
-                    <td class="text-wrap"><?= $information->getStechiometry() ?></td>
-                </tr>
-                <tr>
-                    <th>User</th>
-                    <td class="text-wrap"><?= $information->getUser() ?></td>
-                </tr>
-                <tr>
-                    <th>Date</th>
-                    <td class="text-wrap"><?= $information->getDate() ?></td>
-                </tr>
-                <tr>
-                    <th>Server</th>
-                    <td class="text-wrap"><?= $information->getServer() ?></td>
-                </tr>
-                <tr>
-                    <th>Path</th>
-                    <td class="text-wrap"><?= $information->getPath() ?></td>
-                </tr>
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Informácie</h2>
+                </div>
+            </div>
+            <div class="row">
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <td class="text-wrap"><?= $information->getCalculationID() ?></td>
+                    </tr>
+                    <tr>
+                        <th>Job type</th>
+                        <td class="text-wrap"><?= $information->getJobType() ?></td>
+                    </tr>
+                    <tr>
+                        <th>Method</th>
+                        <td class="text-wrap"><?= $information->getMethod() ?></td>
+                    </tr>
+                    <tr>
+                        <th>Basis set</th>
+                        <td class="text-wrap"><?= $information->getBasisSet() ?></td>
+                    </tr>
+                    <tr>
+                        <th>Stechiometry</th>
+                        <td class="text-wrap"><?= $information->getStechiometry() ?></td>
+                    </tr>
+                    <tr>
+                        <th>User</th>
+                        <td class="text-wrap"><?= $information->getUser() ?></td>
+                    </tr>
+                    <tr>
+                        <th>Date</th>
+                        <td class="text-wrap"><?= $information->getDate() ?></td>
+                    </tr>
+                    <tr>
+                        <th>Server</th>
+                        <td class="text-wrap"><?= $information->getServer() ?></td>
+                    </tr>
+                    <tr>
+                        <th>Path</th>
+                        <td class="text-wrap"><?= $information->getPath() ?></td>
+                    </tr>
 
-                <tr>
-                    <th>InfoInput</th>
-                    <td class="text-wrap"><?= $information->getInfoInput() ?></td>
-                </tr>
-                <tr>
-                    <th>InfoEnd</th>
-                    <td class="text-wrap"><?= $information->getInfoEnd() ?></td>
-                </tr>
-                <tr>
-                    <th>Energy</th>
-                    <td class="text-wrap"><?= $information->getEnergy() ?></td>
-                </tr>
-                <tr>
-                    <th>Thermochemistry</th>
-                    <td class="text-wrap"><?= $information->getThermoChemistry() ?></td>
-                </tr>
+                    <tr>
+                        <th>InfoInput</th>
+                        <td class="text-wrap"><?= $information->getInfoInput() ?></td>
+                    </tr>
+                    <tr>
+                        <th>InfoEnd</th>
+                        <td class="text-wrap"><?= $information->getInfoEnd() ?></td>
+                    </tr>
+                    <tr>
+                        <th>Energy</th>
+                        <td class="text-wrap"><?= $information->getEnergy() ?></td>
+                    </tr>
+                    <tr>
+                        <th>Thermochemistry</th>
+                        <td class="text-wrap"><?= $information->getThermoChemistry() ?></td>
+                    </tr>
 
-            </table>
+                </table>
+            </div>
         </div>
-
         <div class="col-md-8">
             <div class="row">
                 <div class="col-md-12">
@@ -103,16 +111,7 @@ $information = Presenter::getCalculationData($id);
             </div>
 
         </div>
-
     </div>
-
-
-
-    </div>
-
-
-
-
 </div>
 
 </body>
