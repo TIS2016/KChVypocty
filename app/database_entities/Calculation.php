@@ -34,16 +34,16 @@ class Calculation {
     /** @Column(type="string") **/
     protected $path;
 
-    /** @Column(type="string") **/
+    /** @Column(type="text") **/
     protected $infoInput;
 
-    /** @Column(type="string") **/
+    /** @Column(type="text") **/
     protected $infoEnd;
 
-    /** @Column(type="string") **/
+    /** @Column(type="text") **/
     protected $energy;
 
-    /** @Column(type="string") **/
+    /** @Column(type="text") **/
     protected $thermoChemistry;
 
 
