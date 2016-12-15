@@ -84,6 +84,10 @@ $data = Presenter::getTableData();
     <div class="container-fluid">
         <div class="row center">
             <div class="col-md-12">
+		<form action=“../upload.php" method="post" enctype="multipart/form-data">
+		<input type="file" name="file">
+		<input type="submit" value="Upload file" name="submit">
+		</form>
                 <table align="center">
                     <tr class="table-row">
                         <th class="table-header">Id</th>
