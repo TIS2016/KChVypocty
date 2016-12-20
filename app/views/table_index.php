@@ -71,7 +71,7 @@ $data = Presenter::getTableData();
 </head>
 <body>
     <div>
-        <button class="button button-run" >Logout</button>
+        <button class="button button-run" onclick="logout()">Logout</button>
     </div>
     <div>
         <button class="button button-run" onclick="run()">Run</button>
@@ -132,6 +132,14 @@ $data = Presenter::getTableData();
         });
     }
 
+    function logout() {
+        console.log("ok", window.location);
+        <?php
+        session_unset();
+        ?>
+        window.location = "login.php";
+    };
+
     function sendAjaxRequest(callBackFunction) {
         var requestPath = "/tis/app/ajax/ajax_handler.php";
         var responseData = "";
@@ -180,6 +188,11 @@ $data = Presenter::getTableData();
     });
 
     $(".show_info").on("click", function (e) {
+        var id = $(this).attr('data-item-id');
+        window.location.href = "/tis/app/views/item_index.php?item_id=" + id;
+    });
+
+    $(".button.").on("click", function (e) {
         var id = $(this).attr('data-item-id');
         window.location.href = "/tis/app/views/item_index.php?item_id=" + id;
     });
