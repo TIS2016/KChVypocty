@@ -64,6 +64,13 @@ $data = Presenter::getTableData();
             text-align: center;
             margin-bottom: 10px;
         }
+
+        #status-text {
+            margin-top: 5px;
+            width: 150px;
+            height: 30px;
+            float: right;
+        }
         
         
     </style>
@@ -76,6 +83,11 @@ $data = Presenter::getTableData();
     <div>
         <button class="button button-run" onclick="run()">Run</button>
     </div>
+    <div>
+        <button class="button button-run" onclick="showReport()">Show Report</button>
+    </div>
+
+    <div id="status-text"></div>
 
     <div class="search">
         <input type="text" class='mySearch' id="ls_query" placeholder="Type to start searching ...">
@@ -126,9 +138,14 @@ $data = Presenter::getTableData();
 
 <script>
 
+    function showReport() {
+        window.location.href = "/tis/app/views/log.php";
+    }
+
     function run(){
         sendAjaxRequest(function(responseData){
             console.log(responseData);
+            $("#status-text").text(responseData);
         });
     }
 

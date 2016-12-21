@@ -104,23 +104,23 @@ class Lexer {
 
     private function getCalculationsFromFile() {
         if ($this->isNotValidFileExtension()){
-            $this->setErrorMessage("Invalid file extension!");
+            $this->setErrorMessage($this->getPath()." : Invalid file extension!");
             return [];
         }
 
         if (!file_exists($this->path)){
-            $this->setErrorMessage("File does not exists!");
+            $this->setErrorMessage($this->getPath()." : File does not exists!");
             return [];
         }
 
         if ($this->alreadyExists()) {
-            $this->setErrorMessage("File is already processed in database.");
+            $this->setErrorMessage($this->getPath()." : File is already processed in database.");
             return [];
         }
 
         $calculationsData = $this->readFile();
         if (count($calculationsData) == 0) {
-            $this->setErrorMessage("No data found!");
+            $this->setErrorMessage($this->getPath()." : No data found!");
             return [];
         }
 
