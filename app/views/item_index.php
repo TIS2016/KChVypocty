@@ -23,6 +23,7 @@ $information = Presenter::getCalculationData($id);
 <html>
 <head>
     <title>Item</title>
+    <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="/tis/app/assets/bootstrap/css/bootstrap.css">
     <script type="text/javascript" src="/tis/app/assets/bootstrap/js/bootstrap.js"></script>
     <link rel="stylesheet" type="text/css" href="/tis/app/assets/item_style.css">
@@ -76,14 +77,13 @@ $information = Presenter::getCalculationData($id);
                         <th>Path</th>
                         <td class="text-wrap"><?= $information->getPath() ?></td>
                     </tr>
-
                     <tr>
                         <th>InfoInput</th>
                         <td class="text-wrap"><?= $information->getInfoInput() ?></td>
                     </tr>
                     <tr>
-                        <th>InfoEnd</th>
-                        <td class="text-wrap"><?= $information->getInfoEnd() ?></td>
+                        <th>Coordinates</th>
+                        <td class="text-wrap"><?= $information->getCoordinatesFormat() ?></td>
                     </tr>
                     <tr>
                         <th>Energy</th>
@@ -92,6 +92,10 @@ $information = Presenter::getCalculationData($id);
                     <tr>
                         <th>Thermochemistry</th>
                         <td class="text-wrap"><?= $information->getThermoChemistry() ?></td>
+                    </tr>
+                    <tr>
+                        <th>InfoEnd</th>
+                        <td class="text-wrap"><?= $information->getInfoEnd() ?></td>
                     </tr>
 
                 </table>
