@@ -28,7 +28,7 @@ class DoctrineSetup {
         $conn = array(
             'driver' => 'pdo_mysql',
             'user' => 'root',
-            'password' => 'root',
+            'password' => 'fsociety',
             'dbname' => 'tis'
         );
 

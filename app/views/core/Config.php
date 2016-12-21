@@ -21,7 +21,7 @@ class Config
                 'host'               => 'localhost',
                 'database'           => 'tis',
                 'username'           => 'tis',
-                'pass'               => 'TiS2016',
+                'pass'               => 'fsociety',
                 'table'              => 'calculations',
                 // specify the name of search columns
                 'searchColumns'      => ['jobType', 'method', 'basisSet', 'stechiometry', 'user', 'date', 'server'],
@@ -62,7 +62,7 @@ class Config
                 'host'               => 'localhost',
                 'database'           => 'live_search',
                 'username'           => 'root',
-                'pass'               => 'root',
+                'pass'               => 'fsociety',
                 'table'              => 'live_search_table',
                 'searchColumns'      => ['name'],
                 'orderBy'            => '',
