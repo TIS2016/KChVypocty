@@ -18,7 +18,6 @@ class Crawler {
 
     public function find() {
         foreach ($this->directories as $directory) {
-            var_dump($directory);
             $directoryIterator = new RecursiveDirectoryIterator($directory);
             foreach (new RecursiveIteratorIterator($directoryIterator) as $filename => $file) {
                 preg_match("/" . $this->windowsFileExtension . "/", $file, $out);

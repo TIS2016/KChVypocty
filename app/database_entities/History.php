@@ -13,38 +13,19 @@ class History {
     /** @Column(type="string") **/
     protected $path;
 
-    /**
-     * @return mixed
-     */
-    public function getHistoryID()
-    {
+    public function getHistoryID(){
         return $this->historyID;
     }
 
-    /**
-     * @param mixed $calculationID
-     */
-    public function setHistoryID($historyID)
-    {
+    public function setHistoryID($historyID){
         $this->historyID = $historyID;
     }
 
-    /**
-     * @return mixed
-     */
-
-    public function getPath()
-    {
+    public function getPath(){
         return $this->path;
     }
 
-    /**
-     * @param mixed $path
-     */
-    public function setPath($path)
-    {
+    public function setPath($path){
         $this->path = $path;
     }
-
-
 }

@@ -9,7 +9,6 @@ class Presenter {
     }
 
     public static function getCalculationData($id){
-        var_dump($id);
         $calculationRepo = DoctrineSetup::getEntityManager()->getRepository('App\Db\Calculation');
         return $calculationRepo->find($id);
     }
