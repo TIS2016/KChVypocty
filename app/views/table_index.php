@@ -78,7 +78,7 @@ $data = Presenter::getTableData();
 </head>
 <body>
     <div>
-        <button class="button button-run" >Logout</button>
+        <button class="button button-run" onclick="logout()">Logout</button>
     </div>
     <div>
         <button class="button button-run" onclick="run()">Run</button>
@@ -96,6 +96,10 @@ $data = Presenter::getTableData();
     <div class="container-fluid">
         <div class="row center">
             <div class="col-md-12">
+		<form action=“../upload.php" method="post" enctype="multipart/form-data">
+		<input type="file" name="file">
+		<input type="submit" value="Upload file" name="submit">
+		</form>
                 <table align="center">
                     <tr class="table-row">
                         <th class="table-header">Id</th>
@@ -145,6 +149,14 @@ $data = Presenter::getTableData();
         });
     }
 
+    function logout() {
+        console.log("ok", window.location);
+        <?php
+        session_unset();
+        ?>
+        window.location = "login.php";
+    };
+
     function sendAjaxRequest(callBackFunction) {
         var requestPath = "/tis/app/ajax/ajax_handler.php";
         var responseData = "";
@@ -193,6 +205,11 @@ $data = Presenter::getTableData();
     });
 
     $(".show_info").on("click", function (e) {
+        var id = $(this).attr('data-item-id');
+        window.location.href = "/tis/app/views/item_index.php?item_id=" + id;
+    });
+
+    $(".button.").on("click", function (e) {
         var id = $(this).attr('data-item-id');
         window.location.href = "/tis/app/views/item_index.php?item_id=" + id;
     });
