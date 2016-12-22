@@ -200,6 +200,22 @@ class Calculation {
     }
 
     /**
+     * @return mixed
+     */
+    public function getCoordinatesFormat()
+    {
+        $coordinates = "";
+        foreach ($this->coordinates as $coordinate) {
+            $coordinates .=
+                $coordinate->getAtom() . " "
+                . $coordinate->getX() . " "
+                . $coordinate->getY() . " "
+                . $coordinate->getZ() . "<br>";
+        }
+        return $coordinates;
+    }
+
+    /**
      * @param mixed $coordinates
      */
     public function setCoordinates($coordinates)
