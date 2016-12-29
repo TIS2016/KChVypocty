@@ -40,3 +40,9 @@ table {
     background-color:#A0A0A0;
     color:white;
 }
+
+#paging a, .disabled {
+    color: #282828;
+    padding-left: 1%;
+    text-decoration: none;
+}
