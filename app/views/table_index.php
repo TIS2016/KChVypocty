@@ -8,10 +8,12 @@ function turnOnDisplayErrors()
 }
 
 require_once '../../vendor/autoload.php';
+require_once '../../bootstrap.php';
 use AjaxLiveSearch\core\Config;
 use AjaxLiveSearch\core\Handler;
 use App\Db\Calculation;
 use App\Presenter;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 $handler = new Handler();
 $handler->getJavascriptAntiBot();
@@ -19,9 +21,6 @@ $token = $handler->getToken();
 
 $data = Presenter::getTableData();
 ?>
-
-
-
 <!DOCTYPE>
 <html lang="en">
 <head>
@@ -283,43 +282,85 @@ $data = Presenter::getTableData();
 
                 </tr>
                 <?php
-                //                    print_r($_POST);
+                try {
 
-                function check($calc) {
-                    foreach ($_POST as $key => $value) {
-                        if ($key == 'job_type' && $value != '') {
-                            if ($calc->getJobType() != $value) return false;
-                        }
-                        if ($key == 'method' && $value != '') {
-                            if ($calc->getMethod() != $value) return false;
-                        }
-                        if ($key == 'basis_set' && $value != '') {
-                            if ($calc->getBasisSet() != $value) return false;
-                        }
-                        if ($key == 'stechiometry' && $value != '') {
-                            if ($calc->getStechiometry() != $value) return false;
-                        }
+                    // Find out how many items are in the table
+                    $total = count($data);
+
+                    // How many items to list per page
+                    $limit = 2;
+
+                    // How many pages will there be
+                    $pages = ceil($total / $limit);
+
+                    // What page are we currently on?
+                    $page = min($pages, filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT, array(
+                        'options' => array(
+                            'default' => 1,
+                            'min_range' => 1,
+                        ),
+                    )));
+
+                    // Calculate the offset for the query
+                    $offset = ($page - 1) * $limit;
+
+                    // Some information to display to the user
+                    $start = $offset + 1;
+                    $end = min(($offset + $limit), $total);
+
+                    $prevlink = ($page > 1) ? '<a href="?page=1" title="First page">&laquo;</a> <a href="?page=' . ($page - 1) . '" title="Previous page">&lsaquo;</a>' : '<span class="disabled">&laquo;</span> <span class="disabled">&lsaquo;</span>';
+
+                    $nextlink = ($page < $pages) ? '<a href="?page=' . ($page + 1) . '" title="Next page">&rsaquo;</a> <a href="?page=' . $pages . '" title="Last page">&raquo;</a>' : '<span class="disabled">&rsaquo;</span> <span class="disabled">&raquo;</span>';
+//                    echo '<br>page = ' . $page . '<br>';
+                    echo '<div id="paging"><p>', ' Page ', $page, ' of ', $pages, ' pages, displaying ', $start, '-', $end, ' of ', $total, ' results <br>', $prevlink;
+                    for ($i = 1; $i < $pages+1; $i++) {
+                        echo '<a href="?page=' . ($i) . '" title="page ' . $i . '">' . $i .'</a>';
                     }
-                    return true;
+                    echo $nextlink, ' </p></div>';
+
+                    function check($calc)
+                    {
+                        foreach ($_POST as $key => $value) {
+                            if ($key == 'job_type' && $value != '') {
+                                if ($calc->getJobType() != $value) return false;
+                            }
+                            if ($key == 'method' && $value != '') {
+                                if ($calc->getMethod() != $value) return false;
+                            }
+                            if ($key == 'basis_set' && $value != '') {
+                                if ($calc->getBasisSet() != $value) return false;
+                            }
+                            if ($key == 'stechiometry' && $value != '') {
+                                if ($calc->getStechiometry() != $value) return false;
+                            }
+                        }
+                        return true;
+                    }
+
+                    $paginator = Presenter::getPagiData($offset, $limit);
+
+                    foreach ($paginator as $calculation):
+                        if (check($calculation)) { ?>
+                            <tr class="table-row">
+                                <td class="table-column"><?= $calculation->getCalculationID() ?></td>
+                                <td class="table-column"><?= $calculation->getJobType() ?></td>
+                                <td class="table-column"><?= $calculation->getMethod() ?></td>
+                                <td class="table-column"><?= $calculation->getBasisSet() ?></td>
+                                <td class="table-column"><?= $calculation->getStechiometry() ?></td>
+                                <td class="table-column"><?= $calculation->getUser() ?></td>
+                                <td class="table-column"><?= $calculation->getDate() ?></td>
+                                <td class="table-column"><?= $calculation->getServer() ?></td>
+                                <td class="table-column"><?= $calculation->getPath() ?></td>
+                                <td class="table-column"><input data-item-id="<?= $calculation->getCalculationID() ?>"
+                                                                class="show_info" type="button" value="Show details">
+                                </td>
+                            </tr>
+                            <?php
+                        } else continue;
+                    endforeach;
+                } catch (Exception $e) {
+                    echo '<p>', $e->getMessage(), '</p>';
                 }
-                foreach ($data as $calculation ):
-                    if (check($calculation)) { ?>
-                        <tr class="table-row">
-                            <td class="table-column"><?= $calculation->getCalculationID() ?></td>
-                            <td class="table-column"><?= $calculation->getJobType() ?></td>
-                            <td class="table-column"><?= $calculation->getMethod() ?></td>
-                            <td class="table-column"><?= $calculation->getBasisSet() ?></td>
-                            <td class="table-column"><?= $calculation->getStechiometry() ?></td>
-                            <td class="table-column"><?= $calculation->getUser() ?></td>
-                            <td class="table-column"><?= $calculation->getDate() ?></td>
-                            <td class="table-column"><?= $calculation->getServer() ?></td>
-                            <td class="table-column"><?= $calculation->getPath() ?></td>
-                            <td class="table-column"><input data-item-id="<?= $calculation->getCalculationID() ?>" class="show_info" type="button" value="Show details"></td>
-                        </tr>
-                        <?php
-                    }
-                    else continue;
-                endforeach;
                 ?>
             </table>
         </div>
