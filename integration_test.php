@@ -16,7 +16,6 @@ $crawler->find();
 
 $files = $crawler->getPaths();
 
-
 foreach ($files as $file){
     $lexer = new Lexer($file);
     $calculations = $lexer->getCalculations();

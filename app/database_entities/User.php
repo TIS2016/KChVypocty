@@ -11,51 +11,27 @@ class User {
     /** @Id @Column(type="integer") @GeneratedValue **/
     protected $userId;
 
-    /**
-     * @return mixed
-     */
-    public function getUserId()
-    {
+    public function getUserId(){
         return $this->userId;
     }
 
-    /**
-     * @param mixed $userId
-     */
-    public function setUserId($userId)
-    {
+    public function setUserId($userId){
         $this->userId = $userId;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getLogin()
-    {
+    public function getLogin(){
         return $this->login;
     }
 
-    /**
-     * @param mixed $login
-     */
-    public function setLogin($login)
-    {
+    public function setLogin($login){
         $this->login = $login;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getPassword()
-    {
+    public function getPassword(){
         return $this->password;
     }
 
-    /**
-     * @param mixed $password
-     */
-    public function setPassword($password)
-    {
+    public function setPassword($password){
         $this->password = $password;
     }
 

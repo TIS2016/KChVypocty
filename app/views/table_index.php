@@ -70,12 +70,21 @@ $data = Presenter::getTableData();
             height: 30px;
             float: right;
         }
-
-
     </style>
 
 </head>
 <body>
+    <div>
+        <button class="button button-run" onclick="logout()">Logout</button>
+    </div>
+    <div>
+        <button class="button button-run" onclick="run()">Run</button>
+    </div>
+    <div>
+        <button class="button button-run" onclick="showReport()">Show Report</button>
+    </div>
+
+    <div id="status-text"></div>
 
 <form method="POST">
     <select name="job_type" onchange="this.form.submit();">

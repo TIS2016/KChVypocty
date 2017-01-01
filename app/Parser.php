@@ -2,10 +2,6 @@
 
 namespace App;
 
-use App\Db\Calculation;
-use App\Db\Coordinate;
-use App\Db\History;
-use Symfony\Polyfill\Mbstring\Mbstring;
 
 class Parser {
     private $calculations;
@@ -16,12 +12,14 @@ class Parser {
     private $parserJobTypesExtra;
     private $parserMethodsExtra;
     private $newLine;
+    private $calculationResults;
 
     public function __construct($calculations) {
         $this->calculations = $calculations;
         $this->replaceCharacter = "$";
         $this->parserJobTypesExtra = new ParserJobTypesExtra();
         $this->parserMethodsExtra = new ParserMethodsExtra();
+        $this->calculationResults = array();
     }
 
     public function setSpecialCharacter($specialCharacter) {
@@ -50,6 +48,15 @@ class Parser {
         foreach($this->calculations as $calculation) {
             $this->parseCalculation($calculation);
         }
+        $calculationResult = $this->calculationResults[count($this->calculationResults)-1];
+        $calculationResultMethod = $calculationResult->getMethod();
+        if ($this->parserMethodsExtra->isGMethod($calculationResultMethod)) {
+            $calculationResult->insert();
+        } else {
+            foreach ($this->calculationResults as $calculationResult) {
+                $calculationResult->insert();
+            }
+        }
     }
 
     private function parseCalculation($calculation) {
@@ -62,14 +69,13 @@ class Parser {
         $calculation = $body[0];
         $parseBody = $body[1];
 
-        //TODO nemusi fungovat v kazdom pripade
         $coordinates = $this->parseCoordinates($calculation, $tokenArray[1]);
         $calculation = $coordinates[0];
         $parseCoordinates = $coordinates[1];
-        $energy = "";
         $thermoChemistry = "";
 
         if ($tokenArray[1] == $this->parserJobTypesExtra->getFreq()) {
+            $energyTail = $this->parseTail($calculation);
             $parseTail = $this->parseFreqTail($calculation);
             $thermoChemistry = $this->parseTermochemistry();
         } else {
@@ -77,48 +83,28 @@ class Parser {
         }
 
         if ($this->parserMethodsExtra->isGMethod($tokenArray[2])) {
-            $energy = $this->parseEnergy($tokenArray);
+            $energy = $this->parseEnergyGMethods($tokenArray);
+        } else if ($this->parserMethodsExtra->isOVGFPartOfMethod($tokenArray[2])){
+            $energy = $this->parseEnergyOVGF();
+        } else if ($tokenArray[1] == $this->parserJobTypesExtra->getFreq()) {
+            $energyArray = $this->parseEnergy($energyTail);
+            $energy = $energyArray[0];
+        } else {
+            $energyArray = $this->parseEnergy($parseTail);
+            $energy = $energyArray[0];
+            $parseTail = $energyArray[1];
         }
-        $this->insert($tokenArray, $parseBody, $parseCoordinates, $parseTail, $energy, $thermoChemistry);
-    }
 
-    private function insert($tokenArray, $body, $coordinates, $tail, $energy, $thermoChemistry) {
-        $calculationDatabase = new Calculation();
-        $calculationDatabase->setServer($tokenArray[0]);
-        $calculationDatabase->setJobType($tokenArray[1]);
-        $calculationDatabase->setMethod($tokenArray[2]);
-        $calculationDatabase->setBasisSet($tokenArray[3]);
-        $calculationDatabase->setStechiometry($tokenArray[4]);
-        $calculationDatabase->setUser($tokenArray[5]);
-        $calculationDatabase->setDate($tokenArray[6]);
-        $calculationDatabase->setInfoInput($body);
-        $calculationDatabase->setInfoEnd($tail);
-        $calculationDatabase->setPath($this->path);
-        $calculationDatabase->setEnergy($energy);
-        $calculationDatabase->setThermoChemistry($thermoChemistry);
-
-        DoctrineSetup::getEntityManager()->persist($calculationDatabase);
-        DoctrineSetup::getEntityManager()->flush();
-
-        $coordinatesDatabase = new \Doctrine\Common\Collections\ArrayCollection();
-        foreach ($coordinates as $coordinate) {
-            $coordinateDatabase = new Coordinate();
-            $coordinateDatabase->setAtom($coordinate[0]);
-            $coordinateDatabase->setX(floatval($coordinate[1]));
-            $coordinateDatabase->setY(floatval($coordinate[2]));
-            $coordinateDatabase->setZ(floatval($coordinate[3]));
-            $coordinateDatabase->setCalculation($calculationDatabase);
-            $coordinatesDatabase->add($coordinateDatabase);
-        }
-        $calculationDatabase->setCoordinates($coordinatesDatabase);
-        DoctrineSetup::getEntityManager()->persist($calculationDatabase);
-        DoctrineSetup::getEntityManager()->flush();
-
-        $history = new History();
-        $history->setPath($this->path);
-
-        DoctrineSetup::getEntityManager()->persist($history);
-        DoctrineSetup::getEntityManager()->flush();
+        $calculationResult = new CalculationResult(
+            $tokenArray,
+            $parseBody,
+            $parseCoordinates,
+            $parseTail,
+            $this->path,
+            $energy,
+            $thermoChemistry
+        );
+        $this->calculationResults[] = $calculationResult;
     }
 
     private function parseHead($calculation) {
@@ -134,7 +120,7 @@ class Parser {
             $endIndex = strpos($head, $this->specialCharacter);
             $token = substr($head, $startIndex, $endIndex);
             $head = substr($head, $endIndex+1, strlen($head)-$endIndex);
-            array_push($tokenArray, $token);
+            $tokenArray[] = $token;
         }
         return array($calculation, $tokenArray);
     }
@@ -143,7 +129,7 @@ class Parser {
         $endIndex = strpos($calculation, $this->specialCharacter);
         $parseBody = substr($calculation, 0, $endIndex);
         $calculation = substr($calculation, $endIndex+1, strlen($calculation)-$endIndex);
-        $parseBody = $this->addDuplicities($parseBody);
+        $parseBody = str_replace($this->replaceCharacter, "<br>", $parseBody);
         return array($calculation, $parseBody);
     }
 
@@ -162,6 +148,8 @@ class Parser {
     private function parseTail($calculation) {
         $endIndex = strpos($calculation, $this->replaceCharacter);
         $tail = substr($calculation, 0, $endIndex);
+        $tailArray = explode($this->specialCharacter, $tail);
+        $tail = implode("<br>", $tailArray);
         return $tail;
     }
 
@@ -173,21 +161,77 @@ class Parser {
         return $tail;
     }
 
-    private function parseEnergy($tokenArray) {
+    private function parseEnergyGMethods($tokenArray) {
         $tokenString = implode($this->specialCharacter, $tokenArray);
         $endIndex = strpos($this->file, $tokenString);
         $subFile = substr($this->file, 0, $endIndex-5);
         $startIndex = strrpos($subFile, $this->newLine . $this->newLine);
-        $energy = substr($subFile, $startIndex+strlen($this->newLine . $this->newLine), strlen($subFile));
+        $energy = substr($subFile, $startIndex+strlen($this->newLine . $this->newLine)-1, strlen($subFile));
+        $energy = $this->formatSpacesForNewlines($energy);
         return $energy;
+    }
+
+    private function parseEnergyOVGF() {
+        $allEnergy = "";
+        $startSequence = "Summary of results for alpha spin-orbital";
+        $startIndex = strpos($this->file, $startSequence);
+        $subFile = substr($this->file, $startIndex, strlen($this->file)-$startIndex);
+        $endIndex = strpos($subFile, $this->newLine . $this->newLine);
+        $energy = substr($subFile, 0, $endIndex);
+        $subFile = substr($subFile, $endIndex, strlen($subFile)-$endIndex);
+        $energy = str_replace($this->newLine, "<br>", $energy);
+        $energy = preg_replace("/\s\s+/", " ",$energy);
+
+        $allEnergy .= $energy . "<br><br>";
+
+        while ($startIndex != false && $endIndex != false) {
+            $startIndex = strpos($subFile, $startSequence);
+            $subFile = substr($subFile, $startIndex, strlen($subFile)-$startIndex);
+            $endIndex = strpos($subFile, $this->newLine . $this->newLine);
+            $energy = substr($subFile, 0, $endIndex);
+            $subFile = substr($subFile, $endIndex, strlen($subFile)-$endIndex);
+            $energy = str_replace($this->newLine, "<br>", $energy);
+            $energy = preg_replace("/\s\s+/", " ",$energy);
+            $allEnergy .= $energy . "<br><br>";
+        }
+
+        $allEnergy = substr($allEnergy, 0, strlen($allEnergy)-12);
+        return $allEnergy;
+    }
+
+    private function parseEnergy($tail) {
+        $startSequence = "State";
+        $endSequence = "RMSD";
+        $startIndex = strpos($tail, $startSequence);
+        if ($startIndex  == false) {
+            $startSequence = "Version";
+            $startIndex = strpos($tail, $startSequence);
+        }
+        $endIndex = strpos($tail, $endSequence);
+        $energy = substr($tail, $startIndex, $endIndex - $startIndex);
+        $energyArray = explode("<br>", $energy);
+        array_shift($energyArray);
+        $energy = implode("<br>", $energyArray);
+        $startIndex = strpos($tail, $energy);
+        $tail = substr($tail, 0, $startIndex)
+            . substr($tail, $startIndex+strlen($energy), strlen($tail)-$startIndex-strlen($energy));
+        return array($energy, $tail);
     }
 
     private function parseTermochemistry() {
         $startIndex = strpos($this->file, " Zero-point correction=");
         $subFile = substr($this->file, $startIndex, strlen($this->file)-$startIndex);
         $endIndex = strpos($subFile, $this->newLine . " " . $this->newLine);
-        $thermoChemistry = substr($subFile, 0, $endIndex+strlen($this->newLine));
-        return $thermoChemistry;
+        $termoChemistry = substr($subFile, 0, $endIndex+strlen($this->newLine));
+        $termoChemistry = $this->formatSpacesForNewlines($termoChemistry);
+        return $termoChemistry;
+    }
+
+    private function formatSpacesForNewlines($string) {
+        $string = str_replace($this->newLine, "", $string);
+        $string = preg_replace("/\s\s+/", "",$string);
+        $string = preg_replace("/(\d{2,})\s+/", "$1<br>", $string);
+        return $string;
     }
 
     private function removeNewlines($calculation) {
@@ -201,12 +245,6 @@ class Parser {
     private function replaceDuplicities($calculation) {
         $special = $this->specialCharacter . $this->specialCharacter;
         $calculation = str_replace($special, $this->replaceCharacter, $calculation);
-        return $calculation;
-    }
-
-    private function addDuplicities($calculation) {
-        $special = $this->specialCharacter . $this->specialCharacter;
-        $calculation = str_replace($this->replaceCharacter, $special, $calculation);
         return $calculation;
     }
 
