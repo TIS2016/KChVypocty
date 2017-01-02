@@ -246,9 +246,9 @@ foreach ($allData as $calculation) {
                 echo '<div id="paging"><p>', ' Page ', $page, ' of ', $pages, ' pages, displaying ', $start, '-', $end, ' of ', $total, ' results <br>', $prevlink;
                 for ($i = 1; $i < $pages+1; $i++) {
                     if ($page == $i) {
-                        echo '<a class="pagination" style="text-decoration: underline; color: white;" href="?page=' . ($i) . '" title="page ' . $i . '">' . $i . '</a>';
+                        echo '<a class="pagination" style="text-decoration: underline; color: white;" href="?page=' . ($i) . '" title="page ' . $i . '">' . $i . '</a>  ';
                     } else {
-                        echo '<a class="pagination" href="?page=' . ($i) . '" title="page ' . $i . '">' . $i . '</a>';
+                        echo '<a class="pagination" href="?page=' . ($i) . '" title="page ' . $i . '">' . $i . '</a>  ';
                     }
                 }
                 echo $nextlink, ' </p></div>';
