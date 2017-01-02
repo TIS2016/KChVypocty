@@ -114,7 +114,7 @@ class Lexer {
         }
 
         if ($this->alreadyExists()) {
-            $this->setErrorMessage($this->getPath()." : File is already processed in database.");
+            $this->setErrorMessage($this->getPath()." : File is already processed in database!");
             return [];
         }
 
