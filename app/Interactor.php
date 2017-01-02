@@ -4,6 +4,7 @@ namespace App;
 use App\Db\Logs;
 
 class Interactor {
+
     const FILE_WITH_DIRECTORIES = "/home/tis/KChVypocty/app/crawl_dirs";
 
     private $formattedErrorMessages;
@@ -48,5 +49,6 @@ class Interactor {
         $log->setLogText($this->formattedErrorMessages);
         $entityManager->persist($log);
         $entityManager->flush();
+        //echo "report successfuly saved to database";
     }
 }

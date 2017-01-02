@@ -13,13 +13,9 @@ class Presenter {
         return $calculationRepo->find($id);
     }
 
-
-
-    public static function run(){
-
-
-
-
+    public static function getReports(){
+        $reports = DoctrineSetup::getEntityManager()->getRepository('App\Db\Logs');
+        return $reports->findAll();
     }
 
 }
