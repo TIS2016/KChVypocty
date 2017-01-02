@@ -13,6 +13,11 @@ class Presenter {
         return $calculationRepo->find($id);
     }
 
+    public static function getReports()
+    {
+        $reports = DoctrineSetup::getEntityManager()->getRepository('App\Db\Logs');
+        return $reports->findAll();
+    }
     public static function getPagiData($offset, $limit) {
         $queryP = DoctrineSetup::getEntityManager()->createQuery("SELECT calc FROM 'App\Db\Calculation' calc")
                                             ->setFirstResult($offset)

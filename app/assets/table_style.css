@@ -46,3 +46,38 @@ table {
     padding-left: 1%;
     text-decoration: none;
 }
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 4px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.button-run {
+    background-color: white;
+    color: black;
+    border: 2px solid #e7e7e7;
+    float: right;
+}
+
+.button-run:hover {background-color: #e7e7e7;}
+
+.center {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#status-text {
+    margin-top: 5px;
+    width: 150px;
+    height: 30px;
+    float: right;
+}
