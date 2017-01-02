@@ -1,4 +1,4 @@
-\documentclass[12pt,a4paper]{article}
+\documentclass[12pt,a4paper, draft]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 
@@ -11,6 +11,9 @@
 \usepackage{hyperref}
 
 \usepackage{enumitem}
+
+\renewcommand{\labelenumii}{\theenumii}
+\renewcommand{\theenumii}{\theenumi.\arabic{enumii}.}
 
 \begin{document}
 
@@ -32,85 +35,81 @@
 \end{titlepage}
 
 \pagebreak
-
 \tableofcontents
-
 \pagebreak
 
 \section{Úvod}
-
 \subsection{Účel tohto dokumentu}
-Dokument obsahuje všetky požiadavky, ktoré bude aplikácia implementovať. Je určený všetkým, ktorí sa budú podielať na jej vývoji, zahŕňajúc zadávateľa, ktorý kontroluje, či spísané požiadavky spĺňajú všetky potreby, ktoré na systém má, manažérov vývojového tímu, ktorí ho využívajú pri plánovaní a riadení procesu vývoja, dizajnérov, ktorí podľa neho vytvárajú návrh aplikácie, vývojárov, ktorí postupujú podľa návrhu, ktorý sa na neho odkazuje a pomáha im pochopiť aplikáciu, ktorú vyvíjajú, tvorcov testov, ktorí podľa neho vytvárajú validačné testy, správcov výslednej aplikácie, ktorí podľa neho vykonávajú údržbu systému po jeho dodaní. Výsledný dokument je pre všetkých zúčastnených čitateľný a zrozumiteľný.
+Tento dokument obsahuje požiadavky, ktoré bude aplikácia implementovať. Je určený pre každého, kto sa bude podielať na vývoji. Zadávateľ projektu na základe tohto dokumentu skontroluje, či výsledná aplikácia bude spĺňať všetky jeho požiadavky. Členovia vývojového tímu ho budú používať pri plánovaní a riadení procesu vývoja. Pomôže im pri ďalšom návrhu aplikácie a neskôr im ju umožní otestovať. Tento dokument nie je odborným textom, je zrozumiteľný rovnako pre vývojárov aj zadávateľa projektu. Všetky použité odborné termíny sú vysvetlené v sekcii Definície, akronymi a skratky.
 
 \subsection{Rozsah projektu}
-Projekt sa radí medzi stredne veľké projekty. Jeho vývoj bude prebiehať v časovom horizonte približne pol roka, pričom jeho samotná implementácia bude prebiehať v rozsahu jedneho mesiaca. Obsah aplikácie bude pozostávať z častí ako sú crawler, lexer, parser, ORM a jednoduchého, no súčasne intuitívneho grafického užívateľského rozhrania.
-Bonusovou funkcionalitou bude grafické zobrazenie jednotlivých analyzovaných molekúl zvolených konkrétnym používateľom, pre podrobnejšie preskúmanie dát, získanych z výpočtov a naśledne uložených v databáze.
+Projekt sa radí medzi stredne veľké projekty. Jeho vývoj bude prebiehať v časovom horizonte približne pol roka, pričom implementácia bude prebiehať v rozsahu jedného mesiaca. Aplikácia bude pozostávať z viacerých modulov. Napríklad crawler, lexer, parser, ORM a jednoduchého, no zároveň intuitívneho grafického používateľského rozhrania, v ktorom bude možné okrem zobrazenia informácií z databázy, aj zobraziť grafický náhľad molekuly na základe vyrátaného výpočtu.
 
 \subsection{Definície, akronymi a skratky}
-\begin{itemize}
-	\item Crawler - nástroj, ktorý prelieza adresáre na serveroch a hľadá súbory
-	\item Lexer - nástroj, ktorý analyzuje štruktúru súboru (dokumentu)
-	\item Parser - nástroj na spracovanie údajov zo súborov
-	\item ORM - nástroj na prácu s databázou z programovacieho jazyka
-\end{itemize}
+\begin{enumerate}
+	\item Crawler - nástroj, ktorý prehľadáva adresáre na serveroch a hľadá v nich potrebné súbory
+	\item Lexer - nástroj, ktorý analyzuje a kontroluje štruktúru textového sú\-boru, v našom prípade, výsledok analýzy molekuly
+	\item Parser - nástroj, ktorý spracuje dáta z textového súboru
+	\item ORM - nástroj na prístup k databáze z programovacieho jazyka
+	\item mysql - relačná (sql) databáza na ukladanie údajov
+	\item apache - webový server, na ktorom bude bežať grafické používateľské rozhranie aplikácie
+\end{enumerate}
 
 \subsection{Odkazy}
 \begin{itemize}
-	\item Priklad zobrazenia spracovaných dát: \ \url{http://neon.dpp.fmph.uniba.sk/qch_calcs/index.php}
+	\item Príklad zobrazenia spracovaných dát vo webovej aplikácii: \ \url{http://neon.dpp.fmph.uniba.sk/qch_calcs/index.php}
 \end{itemize}
 
 \subsection{Prehľad zostávajucej časti dokumentu}
-V nasledujúcich kapitolách nájdete rozširujúce informácie o projekte.
-Všeobecný popis projektu, perspektívu projektu, podrobný popis funkcionality, účel projektu, charakteristiku cieľových používateľov projektu a ďaľšie.
+\begin{itemize}
+	\item V kapitole 2 sa nachádza stručný popis funkcionality aplikácie.
+	\item V podkapitole 2.1 je stručne popísané o aký typ aplikácie sa jedná
+	\item V podkapitole 2.2 obsahuje informácie, z ktorých si čitateľ vie vytvoriť ucelenú predstavu o funkcionalite aplikácie
+	\item V podkapitole 2.3 sú popísané typy používateľov aplikácie
+	\item V podkapitole 2.4 sa nachádzajú právne obmedzenia projektu
+	\item V podkapitole 2.5 sa nachádzajú konkrétne rozhrania systému s jeho okolím
+	\item Kpitola 3 je najdôležitejšia kapitola a obsahuje zoznam požiadaviek na projekt aj s popisom
+\end{itemize}
 
 
-\section{Všeobecný popis}
-Výsledná aplikácia bude spravovať a prehľadávať databázu, obsahujúcu výsledky kvantovo-chemických výpočtov a bude pravidelne aktualizovaná automaticky alebo manuálne na vyžiadanie samotného používateľa. Aplikácia bude prístupná len vybraným používateľom, ktorým bude pridelené ich vlastné prihlasovacie meno a heslo. Každému z používateľov bude zároveň prístupný celý obsah databázy, teda obsah spravovaný každým z jednotlivých používateľov.
+\section{Všeobecný popis projektu}
+Aplikácia bude napĺňať databázu zozbieranými údajmi. Bude obsahovať výsledky kvantovo-chemických výpočtov a bude pravidelne aktualizovaná o nové dáta. Aktualizácia dát bude prebiehať automaticky alebo manuálne na vyžiadanie používateľa. Aplikácia bude prístupná len konkrétnym používateľom, ktorí sa budú prihlasovať pomocou prihlasovacieho mena a hesla. Prihlásení používatelia budú môcť vo webovom rozhraní vyhľadávať a filtrovať údaje na základe bázy, metódy výpočtu a ďalších parametrov. Webové rozhranie bude ponúkať možnosť vykreslenia jednoduchého náhľadu molekuly na základe výsledku výpočtu.
 
 \subsection{Perspektívny pohľad na projekt}
 Projekt bude mať otvorený zdrojový kód. Bude bežať na linuxovom serveri a bude poskytovať webové rozhranie.
 
-
 \subsection{Funkcionalita výslednej aplikácie}
-Výsledná aplikácia bude pracovať nasledujúcim spôsobom: \
-Vyhľadá súbory s výsledkami výpočtov z meracích prístrojov, ktoré sú uložené na konkrétnych serveroch. Dáta zo súborov najskôr analyzuje, potom spracuje a uloží ich do databázy.
-V pravidelných časových intervaloch, alebo na vyžiadanie používateľa, bude rozširovať databázu o dáta z novopridaných súborov. Aplikácia poskytne používateľovi jednoduché a intuitívne webové rozhranie, v ktorom bude možné vykonávať požadované operácie nad dátami z databázy, ako je napríklad pokročilé vyhľadávanie na základe rôznych kritérii či možnosť jednoduchécho vykreslenia molekuly na základe údajov z databázy. Webové rozhranie bude vedieť poskytnúť informácie o určitej molekule, či bola niekedy analyzovaná, akými metódami bola analyzovaná a podobne. Na prácu s aplikáciou postačí pripojenie na internet a webový prehliadač. Aplikácia bude chránená heslom a každý používateľ bude mať svoje prihlasovacie údaje, ktoré bude možné zmeniť. Nových používateľov bude mocť pridávať iba administrátor.
+Výsledná aplikácia bude pracovať nasledujúcim spôsobom: 
+Vyhľadá sú\-bory s výsledkami výpočtov, ktoré vygenerovali externé programy. Prehľadávať sa budú servery a konkrétne priečinky, ktoré budú uložené v konfiguračnom súbore. Obsah konfiguračného súboru bude mať pevnú štruktúru a bude sa dať editovať používateľmi. Nad súbormi prebehne jednoduchá syntaktická analýza, na základe ktorej sa vyradia súbory, ktoré neobsahujú potrebné informácie. Dáta z validných súborov sa rozparsujú na jednotlivé údaje, ktoré sa uložia do databázy.
+V pravidelných časových intervaloch alebo na vyžiadanie používateľa sa databáza bude rozširovať o dáta z novopridaných alebo zmenených súborov. Používateľské rozhranie bude realizované ako webová stránka a umožní používateľovi vykonávať požadované operácie nad zozbieranými dátami v databáze, ako je napríklad pokročilé vyhľadávanie na základe rôznych kritérií, či možnosť jednoduchého vykreslenia molekuly na základe výsledkov výpočtu. Na prácu s aplikáciou postačí pripojenie na internet a webový prehliadač. Aplikácia bude zabezpečená heslom a na jej používanie sa bude potrebné prihlásiť.
 
 \subsection{Charakteristika používateľov}
-Aplikácia je určená pre chemikov a fyzikov, ktorí pracujú s veľkým množstvom dát z meracích prístrojov a potrebujú v nich mať poriadok. Zákazníci sú profesionálni chemici a fyzici, ktorí potrebujú nástroj, ktorý by im zjednodušil prácu s dátami analyzovaných molekúl.
+Aplikácia je určená pre chemikov, ktorí pracujú s veľkým množstvom dát z vypočítaných výpočtov a potrebujú v nich mať poriadok. Vzhľadom na povahu aplikácie, nebudú existovať špeciálne používateľské role.
 
 \subsection{Všeobecné obmedzenia}
-Aplikácia je robená na mieru, takže nemôže si hocikto vytvoriť účet a používať ju. Používateľské kontá môže vytvárať iba administrátor. Na využívanie aplikácie je potrebné mať prístup k internetu a webový prehliadač. Webové rozhranie zobrazuje molekuly, ktoré má uložené v databáze. Ak je výpočet pre nejakú molekulu neúplný alebo chybný, potom danú molekulu nebude možné zobraziť. Objaví sa iba upozornenie, že dáta z výpočtu nie sú validné. Ak hľadaná molekula neexistuje v databáze, používateľ má možnosť nahrať súbor s výpočtom pre danú molekulu a v nasledujúcom vyhľadávaní, údaje o molekule budú zobrazené.
+Aplikácia bude obsahovať údaje z kvantovo-chemických výpočtov mole\-kúl. Dáta nie sú tajné, ani chránené a nepotrebujú špeciálne zabezpečenie, preto bude aplikácia obsahovať iba jednoduché zabezpečenie pomocou používateľského mena a hesla.
 
 \subsection{Predpoklady a závislosti}
-Grafické užívateľské prostredie bude po otvorení webstránky s aplikáciou v úvode pozostávať z prihlasovacieho formuláru tvoreného textovými poľami, určenými pre zadanie používateľského mena a používateľského hesla, slúžiacimi na identifikáciu jednotlivých vybraných používateľov a udelenie im prislúchajúcich právomocí. Po prihlásení bude používateľovi zobrazený aktuálny výpis údajov obsiahnutých v databáze, ako aj prvky ovládačov, slúžiacich 
-na prácu s vybranými dátami, podľa bližšie špecifikovaných požiadaviek zadávateľa, zahŕňajúc jednoduchú správu jednotlivých používateľov alebo vybraného používateľa.
+Aplikácia bude bežať na linuxovom serveri. Bude využívať relačnú da\-tabázu na ukladanie údajov. Predpokladáme, že nebude mať veľké nároky na procesor a operačnú pamäť. Vzhľadom na povahu dát, ktoré budú v databáze uložené, bude jej veľkosť maximálne niekoľko desiatok megabajtov. Používateľské rozhranie bude bežať na webovom serveri.
 
-\section{Zoznam špecifických požiadaviek na systém}
-\begin{enumerate}[label={[\arabic*]}]
-	\item { \bf Vyhľadávanie súborov na serveroch } \\ \\
-	Aplikácie bude vyhľadávať súbory na serveroch, ktoré obsahujú výsledky výpočtov z meracích zariadení. Tieto súbory bude ďalej spracovávať. Konkrétne miesta vyhľaávania budú špecifikované v konfiguračných súboroch.
-	\item { \bf Analýza nájdených súborov } \\ \\
-	Aplikácia bude analyzovať nájdené súbory, resp. bude zisťovať či majú validnú štruktúru, vhodnú k ďalšiemu spracovaniu.
-	\item { \bf Spracovanie údajov z nájdených súborov } \\ \\
-	Aplikácia bude vedieť spracovať dáta z nájdených súborov do vhodného formátu, aby ich bolo možné ľahko uložiť do databázy. 
-	\item { \bf Uloženie údajov do databázy }\\ \\
-	Aplikácia bude vedieť uložiť spracované dáta prehľadne do databázy. S dátami v databáze sa bude dať ďalej pracovať.
-	\item { \bf Aktualizovanie databázy o novopridané súbory } \\ \\
-	Aplikácia bude v pravidelných časových intervaloch, alebo na vyžiadanie používateľa,  zisťovať prítomnosť novopridaných súborov, ktorých údaje ešte nie sú uložené v databáze a aktualizovať databázu o nové údaje.
-	\item { \bf  Webové používateľské rozhranie }
-	Aplikácia bude ovládaná pomocou jednoduchého webového používateľského rozhrania.
-	\item { \bf Možnosť vykonávania operácii nad dátami v databáze }\\ \\
-	Aplikácia bude poskytovať nástroje na prácu s údajmi uloženými v databáze. Bude medzi nimi vedieť vyhľadávať podľa rôznych kritérii, zisťovať informácie o tom, či bola konkrétna molekula analyzovaná, resp. či sa nachádza v databáze. Keď nájde požadovanú molekulu, vypíše, akými metódami bola naalyzovaná, koľko krát bola analyzovaná a podobne.
-	\item { \bf Zabezpečenie aplikácie } \\ \\
-	Na prístup do aplikácie bude nutné prihlásenie svojim používateľkým menom a heslom. Používateľov bude môcť pridávať iba administrátor. 
-	
+\section{Zoznam špecifických požiadaviek na \- systém}
+
+\begin{enumerate}
+	\item { \bf Vyhľadávanie a spracovanie súborov s dátami } 
+	\begin{enumerate}
+		\item Aplikácia bude vyhľadávať súbory na serveroch, ktoré obsahujú výsledky výpočtov. Vyhľadávať bude na základe prípony v názve súboru. Konkrétne priečinky, ktoré sa budú prehľadávať budú špecifikované v konfiguračnom súbore, ktorý budú editovať používatelia.
+		\item Nad zozbieranými súbormi prebehne jednoduchá syntaktická ana\-lýza. Tým sa vylúčia súbory, ktoré sú chybné, resp. neobsahujú požadované informácie.
+		\item Dáta z validných súborov sa rozparsujú na tokeny, čiže konkrétne údaje, ktoré sa uložia do databázy vo forme tabuliek.
+		\item Údaje v databáze budú aktualizované v pravidelných časových intervaloch alebo na vyžiadanie používateľa.
+	\end{enumerate}
+	\item { \bf  Používateľské rozhranie aplikácie } 
+	\begin{enumerate}
+		\item Po otvorení stránky sa zobrazí prihlasovacia obrazovka, kde je potrebné zadať prihlasovacie údaje.
+		\item V prípade zabudnutia hesla, bude možnosť obnoviť heslo, po za\-daní emailu.
+		\item Po prihlásení sa zobrazí rozhranie aplikácie, ktoré bude generované dynamicky na základe zvolených kritérií filtrovania údajov, bude obsahovať ovládacie prvky, konkrétne tlačidlo na odhlásenie sa z aplikácie, tlačidlo na aktualizácie údajov v databáze, jednoduchý vyhľadávací box, ktorý bude prehľadávať databázu na základe zvolených kritérií, možnosť editácie konfiguračných súborov a mož\-nosť vykreslenia náhľadu molekuly.
+		\item Kritéria, podľa ktorých bude možné vyhľadávať, budú napríklad báza, metóda, stechometria (vzorec) molekuly, dátum a ďalšie.
+		\item Údaje sa budú zobrazovať v prehľadnej tabuľke.
+	\end{enumerate}
 \end{enumerate}
-
-\section{Dodatky}
-\begin{itemize}
-	\item zatiaľ žiadne
-\end{itemize}
-
 \end{document}
 
