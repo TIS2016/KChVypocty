@@ -215,6 +215,19 @@ class Calculation {
         return $coordinates;
     }
 
+    public function getCoordinatesAsArray(){
+        $coordinatesArray = [];
+        foreach ($this->coordinates as $coordinate){
+            $atom = [];
+            $atom['atom'] = $coordinate->getAtom();
+            $atom['y'] = $coordinate->getY();
+            $atom['x'] = $coordinate->getX();
+            $atom['z'] = $coordinate->getZ();
+            $coordinatesArray[] = $atom;
+        }
+        return $coordinatesArray;
+    }
+
     /**
      * @param mixed $coordinates
      */
