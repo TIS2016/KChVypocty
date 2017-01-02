@@ -207,9 +207,9 @@ class Calculation {
         $coordinates = "";
         foreach ($this->coordinates as $coordinate) {
             $coordinates .=
-                $coordinate->getAtom() . " "
-                . $coordinate->getX() . " "
-                . $coordinate->getY() . " "
+                $coordinate->getAtom() . "          "
+                . $coordinate->getX() . "          "
+                . $coordinate->getY() . "          "
                 . $coordinate->getZ() . "<br>";
         }
         return $coordinates;
