@@ -186,14 +186,18 @@ Diagram popisuje proces pripojenia k databáze. Knižnica PDO pošle požiadavku
 \ref{fig:datovy_model}
 Dátový model popisuje štruktúru databázy.
 \begin{itemize}
+	\item{\bf Calculations} \par
+	Tabuľka calculations obsahuje zoznam výsledkov výpočtov. Výsledky výpočtov majú priradené id, plniace funkciu primárneho kľúča (calculationID), spôsob testovania vzorky (jobType), metódu testovania vzorky (method), iniciálnu konfiguráciu (basisSet), zjednodušený chemický vzorec testovanej vzorky (stechiometry), používateľa, spúšťajúceho testovanie vzorky (user), dátum testovania vzorky (date), meno servera, ukladajúceho daný výsledok výpočtu (server), cestu k súboru daného výsledku výpočtu (path), bližšie nešpecifikované, zadávateľom požadované údaje (infoInput), (infoEnd), energiu (energy) a termochémiu (thermoChemistry).
+	\item{\bf Coordinates} \par
+	Tabuľka coordinates obsahuje zoznam súradníc bodov. Súradnice bodov majú priradené id, plniace funkciu primárneho kľúča (pointCoordinateId), atóm, ktorému prislúchajú (atom), súradnicu x bodu (x), súradnicu y bodu (y) a súradnicu z bodu (z).
 	\item{\bf Users} \par
-	Tabuľka users obsahuje zoznam používateľov. Používatelia majú priradené id, plniace funkciu primárneho kľúča (id), meno, pod ktorým sa prihlasujú (login) a heslo, s ktorým sa prihlasujú (password).
-	\item{\bf Calculation results} \par
-	Tabuľka calculation results obsahuje zoznam výsledkov výpočtov. Výsledky výpočtov majú priradené id, plniace funkciu primárneho kľúča (id), spôsob testovania vzorky (job type), metódu testovania vzorky (method), iniciálnu konfiguráciu (basis set), zjednodušený chemický vzorec testovanej vzorky (stechiometry), používateľa, spúšťajúceho testovanie vzorky (user), dátum testovania vzorky (date), meno servera, ukladajúceho daný výsledok výpočtu (server) a cestu k súboru daného výsledku výpočtu (path).
+	Tabuľka users obsahuje zoznam používateľov. Používatelia majú priradené id, plniace funkciu primárneho kľúča (userId), meno, pod ktorým sa prihlasujú (login) a heslo, s ktorým sa prihlasujú (password).
 	\item{\bf History} \par
-	Tabuľka history obsahuje zoznam spracovaných súborov. Spracované súbory majú priradené id, plniace funkciu primárneho kľúča (id) a cestu, ktorá popisuje ich umiestnenie (path).
+	Tabuľka history obsahuje zoznam spracovaných súborov. Spracované súbory majú priradené id, plniace funkciu primárneho kľúča (historyID) a cestu, ktorá popisuje ich umiestnenie (path).
 	\item{\bf Logs} \par
-	Tabuľka logs obsahuje zoznam chybových správ. Chybové správy majú priradené id, plniace funkciu primárneho kľúča (id) a text, ktorý je ich obsahom (text).
+	Tabuľka logs obsahuje zoznam chybových správ. Chybové správy majú priradené id, plniace funkciu primárneho kľúča (logID) a text, ktorý je ich obsahom (logText).
+	\item{\bf Popis vzťahov} \par
+	Tabuľky users, history a logs sa neviažu na žiadnu tabuľku. Tabuľka coordinates sa viaže na tabuľku calculations tak, že jedna súradnica bodu je obsiahnutá v práve jednom výsledku výpočtu, pričom jeden výsledok výpočtu môže obsahovať niekoľko súradníc bodov.
 \end{itemize}
 
 \subsubsection{Komponentný diagram}
@@ -239,7 +243,7 @@ Používateľké rozhranie aplikácie je navrhnuté jednoducho podľa požiadavi
 	\label{fig:ui2}
 \end{figure}
 \ref{fig:ui2}
-Obrazovka s tabuľkou výpočtov po prihlásení používateľovi zobrazuje formou tabuľky aktuálny výpis údajov výpočtov obsiahnutých v databáze, prvky ovládačov, slúžiacich na vyhľadávanie týchto údajov formou textového poľa, ako aj ovládačov, slúžiacich na prácu s vybranými dátami formou tlačidiel.
+Obrazovka s tabuľkou výpočtov po prihlásení používateľovi zobrazuje formou tabuľky aktuálny výpis údajov výpočtov obsiahnutých v databáze, prvky ovládačov, slúžiacich na vyhľadávanie týchto údajov formou textového poľa a select tabov, ako aj ovládačov, slúžiacich na prácu s vybranými dátami formou tlačidiel.
 \begin{figure}[H]
 	\caption{Obrazovka s výpočtom}
 	\includegraphics[width=\textwidth]{item}
