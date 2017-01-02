@@ -41,6 +41,11 @@ table {
     color:white;
 }
 
+#paging a, .disabled {
+    color: #282828;
+    padding-left: 1%;
+    text-decoration: none;
+}
 .button {
     background-color: #4CAF50; /* Green */
     border: none;

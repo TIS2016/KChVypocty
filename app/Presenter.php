@@ -1,6 +1,6 @@
 <?php
 namespace App;
-
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class Presenter {
     public static function getTableData(){
@@ -13,9 +13,25 @@ class Presenter {
         return $calculationRepo->find($id);
     }
 
-    public static function getReports(){
+    public static function getReports()
+    {
         $reports = DoctrineSetup::getEntityManager()->getRepository('App\Db\Logs');
         return $reports->findAll();
+    }
+    public static function getPagiData($offset, $limit) {
+        $queryP = DoctrineSetup::getEntityManager()->createQuery("SELECT calc FROM 'App\Db\Calculation' calc")
+                                            ->setFirstResult($offset)
+                                            ->setMaxResults($limit);
+        $paginator = new Paginator($queryP, $fetchJoinCollection = true);
+
+        return $paginator;
+    }
+
+    public static function run(){
+
+
+
+
     }
 
 }
