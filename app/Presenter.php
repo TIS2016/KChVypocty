@@ -27,12 +27,11 @@ class Presenter {
         return $paginator;
     }
 
-    public static function run(){
 
-
-
-
+    public static function getDistinctValues($rowName){
+        $dql = "SELECT DISTINCT calc.$rowName FROM App\Db\Calculation calc";
+        $rows = DoctrineSetup::getEntityManager()->createQuery($dql)->getResult();
+        return $rows;
     }
-
 }
 
