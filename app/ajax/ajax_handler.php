@@ -1,6 +1,9 @@
 <?php
 namespace App;
+session_start();
 require_once '../../vendor/autoload.php';
+$_SESSION['running'] = true;
+
 
 $interactor = new Interactor();
 $interactor->runParser();
@@ -11,3 +14,5 @@ if ($interactor->hasErrors()) {
 } else {
     echo "Finished without errors";
 }
+
+unset($_SESSION['running']);
