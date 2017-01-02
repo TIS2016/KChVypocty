@@ -1,10 +1,11 @@
 <?php
-turnOnDisplayErrors();
+session_start();
+if (!$_SESSION['logged_in']){
+   header("Location: ../../index.php");
+}
 
-function turnOnDisplayErrors()
-{
-    ini_set('display_errors', 1);
-    error_reporting(E_ALL ^ E_NOTICE);
+if (isset($_POST['logout_button'])){
+    destroySessionAndRedirect();
 }
 
 require_once '../../vendor/autoload.php';
@@ -16,21 +17,19 @@ use App\Presenter;
 $handler = new Handler();
 $handler->getJavascriptAntiBot();
 $token = $handler->getToken();
-
 $data = Presenter::getTableData();
 ?>
-
-
 
 <!DOCTYPE>
 <html lang="en">
 <head>
     <title>Table</title>
+    <script src="js/jquery-3.1.1.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <script type="text/javascript" src="/tis/app/assets/bootstrap/js/bootstrap.js"></script>
     <link rel="stylesheet" type="text/css" href="../assets/table_style.css">
     <link rel="stylesheet" type="text/css" href="css/ajaxlivesearch.min.css">
-    <script src="js/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/fontello.css">
     <script src="js/ajaxlivesearch.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/tis/app/assets/item_style.css">
 
@@ -65,20 +64,15 @@ $data = Presenter::getTableData();
             margin-bottom: 10px;
         }
 
-        #status-text {
-            margin-top: 5px;
-            width: 150px;
-            height: 30px;
-            float: right;
-        }
-        
-        
+
     </style>
 
 </head>
 <body>
     <div>
-        <button class="button button-run" onclick="logout()">Logout</button>
+        <form method="post" action="table_index.php">
+            <button class="button button-run" name="logout_button">Logout</button>
+        </form>
     </div>
     <div>
         <button class="button button-run" onclick="run()">Run</button>
@@ -132,12 +126,10 @@ $data = Presenter::getTableData();
             </div>
         </div>
     </div>
-
 </body>
 </html>
 
 <script>
-
     function showReport() {
         window.location.href = "/tis/app/views/log.php";
     }
@@ -149,30 +141,25 @@ $data = Presenter::getTableData();
         });
     }
 
-    function logout() {
-        console.log("ok", window.location);
-        <?php
-        session_unset();
-        ?>
-        window.location = "login.php";
-    };
-
     function sendAjaxRequest(callBackFunction) {
-        var requestPath = "/tis/app/ajax/ajax_handler.php";
+        var requestPath = "/tis/app/ajax/run_script.php";
         var responseData = "";
         $.ajax({
+            timeout: 1000000000,
             url: requestPath,
-            type: 'post',
+            type: 'POST',
             dataType: 'text',
             success: function (data) {
+                console.log("End");
                 callBackFunction(data);
-            }
+            },
+            error: function(data){
+                console.log(data);
+            },
+            data: { name: "John", location: "Boston" }
         });
-
         return responseData;
     }
-
-
 
     jQuery("#ls_query").ajaxlivesearch({
         loaded_at: <?php echo time(); ?>,
@@ -180,24 +167,14 @@ $data = Presenter::getTableData();
         max_input: <?php echo Config::getConfig('maxInputLength'); ?>,
         onResultClick: function(e, data) {
             var selectedOne = jQuery(data.selected).find('td').eq('0').text();
-
             // set the input value
             jQuery('#ls_query').val(selectedOne);
-
             // hide the result
             jQuery("#ls_query").trigger('ajaxlivesearch:hide_result');
-
-//            var requestData = {};
-//            requestData.calculation_id = selectedOne;
-//
-//            sendAjaxRequest(function (data) {
-//                console.log(data);
-//            }, requestData);
-
             window.location.href = "/tis/app/views/item_index.php?item_id=" + selectedOne;
         },
         onResultEnter: function(e, data) {
-             jQuery("#ls_query").trigger('ajaxlivesearch:search', {query: 'test'});
+            jQuery("#ls_query").trigger('ajaxlivesearch:search', {query: 'test'});
         },
         onAjaxComplete: function(e, data) {
 
@@ -209,8 +186,16 @@ $data = Presenter::getTableData();
         window.location.href = "/tis/app/views/item_index.php?item_id=" + id;
     });
 
-    $(".button.").on("click", function (e) {
+    $(".button").on("click", function (e) {
         var id = $(this).attr('data-item-id');
         window.location.href = "/tis/app/views/item_index.php?item_id=" + id;
     });
 </script>
+
+<?php
+    function destroySessionAndRedirect(){
+        unset($_SESSION['logged_in']);
+        session_destroy();
+        header("Location: ../../index.php");
+    }
+?>
