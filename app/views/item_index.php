@@ -2,8 +2,9 @@
 namespace App\Views;
 require_once '../../vendor/autoload.php';
 use App\Presenter;
+
 session_start();
-if (!$_SESSION['logged_in']){
+if (!$_SESSION['logged_in']) {
     header("Location: ../../index.php");
 }
 
@@ -12,29 +13,40 @@ if (isset($_GET['item_id'])) {
     $id = $_GET['item_id'];
 }
 $information = Presenter::getCalculationData($id);
+
+if (isset($_POST['back'])){
+    echo "something";
+    header("Location: table_index.php");
+
+}
 ?>
 
 <!DOCTYPE>
 <html>
-    <head>
-        <title>Item</title>
-        <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="/tis/app/assets/bootstrap/css/bootstrap.css">
-        <script type="text/javascript" src="/tis/app/assets/bootstrap/js/bootstrap.js"></script>
-        <link rel="stylesheet" type="text/css" href="/tis/app/assets/item_style.css">
-    </head>
-    <body>
+<head>
+    <title>Item</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/tis/app/assets/bootstrap/css/bootstrap.css">
+    <script type="text/javascript" src="/tis/app/assets/bootstrap/js/bootstrap.js"></script>
+    <link rel="stylesheet" type="text/css" href="/tis/app/assets/item_style.css">
+</head>
+<body>
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h2>Informácie</h2>
-                    </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Informácie</h2>
+
                 </div>
-                <div class="row">
-                    <table>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <form method="post" >
+                        <input type="submit" value="späť" name="back">
+                    </form>
+                    <table class="info-table">
                         <tr>
                             <th>ID</th>
                             <td class="text-wrap"><?= $information->getCalculationID() ?></td>
@@ -77,7 +89,17 @@ $information = Presenter::getCalculationData($id);
                         </tr>
                         <tr>
                             <th>Coordinates</th>
-                            <td class="text-wrap"><?= $information->getCoordinatesFormat() ?></td>
+                            <td class="text-wrap">
+                                <table>
+                                    <?php foreach ($information->getCoordinatesAsArray() as $row): ?>
+                                        <tr>
+                                            <td><?= $row['atom'] ?></td>
+                                            <td><?= $row['x'] ?></td>
+                                            <td><?= $row['y'] ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </table>
+                            </td>
                         </tr>
                         <tr>
                             <th>Energy</th>
@@ -91,26 +113,13 @@ $information = Presenter::getCalculationData($id);
                             <th>InfoEnd</th>
                             <td class="text-wrap"><?= $information->getInfoEnd() ?></td>
                         </tr>
-
-                </table>
-            </div>
-        </div>
-        <div class="col-md-8">
-            <div class="row">
-                <div class="col-md-12">
-                    <h2>Náhľad</h2>
+                    </table>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="insight">
-                    </div>
-                </div>
-            </div>
-
         </div>
+
     </div>
 </div>
 
-    </body>
+</body>
 </html>
