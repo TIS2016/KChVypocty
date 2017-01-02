@@ -51,4 +51,22 @@ class Interactor {
         $entityManager->flush();
         //echo "report successfuly saved to database";
     }
+
+    public function changeStateToRunning() {
+        $entityManager = DoctrineSetup::getEntityManager();
+        $dql = "UPDATE status "
+
+        $log = new State();
+        $log->setLogText($this->formattedErrorMessages);
+        $entityManager->persist($log);
+        $entityManager->flush();
+    }
+
+    public function changeStateToNotRunning(){
+
+    }
+
+    public function isRunning(){
+
+    }
 }

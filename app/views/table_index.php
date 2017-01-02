@@ -325,7 +325,6 @@ foreach ($allData as $calculation) {
         var requestPath = "/tis/app/ajax/run_script.php";
         var responseData = "";
         $.ajax({
-            timeout: 1000000000,
             url: requestPath,
             type: 'POST',
             dataType: 'text',
