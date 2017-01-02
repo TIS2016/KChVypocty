@@ -41,3 +41,6 @@ th {
     word-break: break-all;
 }
 
+.info-table {
+    width: 100%;
+}
