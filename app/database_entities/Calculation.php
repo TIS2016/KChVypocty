@@ -221,7 +221,8 @@ class Calculation {
             $atom = [];
             $atom['atom'] = $coordinate->getAtom();
             $atom['y'] = $coordinate->getY();
-            $atom['x'] = $coordinate->getX();
+            $atom['x'] = $coordinate->getX
+            ();
             $atom['z'] = $coordinate->getZ();
             $coordinatesArray[] = $atom;
         }

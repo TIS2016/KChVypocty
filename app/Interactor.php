@@ -51,4 +51,24 @@ class Interactor {
         $entityManager->flush();
         //echo "report successfuly saved to database";
     }
+
+    public function changeStateToRunning() {
+        $entityManager = DoctrineSetup::getEntityManager();
+        $status = $entityManager->find("App\Db\Status", 1);
+        $status->setStatus("running");
+        $entityManager->flush();
+    }
+
+    public function changeStateToNotRunning(){
+        $entityManager = DoctrineSetup::getEntityManager();
+        $status = $entityManager->find("App\Db\Status", 1);
+        $status->setStatus("notrunning");
+        $entityManager->flush();
+
+    }
+    public function isRunning(){
+        $entityManager = DoctrineSetup::getEntityManager();
+        $status = $entityManager->find("App\Db\Status", 1);
+        return $status->getStatus() == "running";
+    }
 }

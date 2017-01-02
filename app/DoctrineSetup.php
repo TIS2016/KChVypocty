@@ -37,8 +37,6 @@ class DoctrineSetup {
 
         return $entityManager;
     }
-
-
 }
 
 

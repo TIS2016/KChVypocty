@@ -33,8 +33,8 @@ $data = [];
 if (isset($_POST['job_type']) || isset($_POST['method']) || isset($_POST['basis_set']) || isset($_POST['stechiometry'])) {
     $_SESSION['post'] = $_POST;
 }
-function check($calc)
-{
+
+function check($calc){
     if (isset($_SESSION['post'])) {
         foreach ($_SESSION['post'] as $key => $value) {
             if ($key == 'job_type' && $value != '') {
@@ -81,46 +81,6 @@ foreach ($allData as $calculation) {
     <link rel="stylesheet" type="text/css" href="css/fontello.css">
     <script src="js/ajaxlivesearch.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/tis/app/assets/item_style.css">
-
-    <style>
-
-        .button {
-            background-color: #4CAF50; /* Green */
-            border: none;
-            color: white;
-            padding: 4px 8px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            -webkit-transition-duration: 0.4s; /* Safari */
-            transition-duration: 0.4s;
-            cursor: pointer;
-        }
-
-        .button-run {
-            background-color: white;
-            color: black;
-            border: 2px solid #e7e7e7;
-            float: right;
-        }
-
-        .button-run:hover {background-color: #e7e7e7;}
-
-        .center {
-            text-align: center;
-            margin-bottom: 10px;
-        }
-
-        #status-text {
-            margin-top: 5px;
-            width: 150px;
-            height: 30px;
-            float: right;
-        }
-    </style>
-
 </head>
 <body>
     <div>
@@ -135,14 +95,6 @@ foreach ($allData as $calculation) {
         <button class="button button-run" onclick="showReport()">Show Report</button>
     </div>
 
-    <div id="status-text">
-        <?php if (isset($_SESSION['running'])): ?>
-            Running
-        <?php else: ?>
-            Not runing
-        <?php endif; ?>
-
-    </div>
 
 <form method="POST" name="filter" action="table_index.php">
     <select name="job_type" onchange="this.form.submit();">
@@ -279,6 +231,12 @@ foreach ($allData as $calculation) {
                 }
                 ?>
             </table>
+            <style>
+                .pagination {
+                    color: black;
+                    text-decoration: none;
+                }
+            </style>
 
             <?php
                 $prevlink = ($page > 1) ? '<a class="pagination" href="?page=1" title="First page">&laquo;</a> <a class="pagination" href="?page=' . ($page - 1) . '" title="Previous page">&lsaquo;</a>' : '<span class="disabled">&laquo;</span> <span class="disabled">&lsaquo;</span>';
@@ -288,24 +246,16 @@ foreach ($allData as $calculation) {
                 echo '<div id="paging"><p>', ' Page ', $page, ' of ', $pages, ' pages, displaying ', $start, '-', $end, ' of ', $total, ' results <br>', $prevlink;
                 for ($i = 1; $i < $pages+1; $i++) {
                     if ($page == $i) {
-                        echo '<a class="pagination" style="text-decoration: underline; color: white;" href="?page=' . ($i) . '" title="page ' . $i . '">' . $i . '</a>  ';
+                        echo '<a class="pagination" style="text-decoration: underline; color: white;" href="?page=' . ($i) . '" title="page ' . $i . '">' . $i . '</a>';
                     } else {
-                        echo '<a class="pagination" href="?page=' . ($i) . '" title="page ' . $i . '">' . $i . '</a>  ';
+                        echo '<a class="pagination" href="?page=' . ($i) . '" title="page ' . $i . '">' . $i . '</a>';
                     }
                 }
                 echo $nextlink, ' </p></div>';
             ?>
-
-            <style>
-                .pagination {
-                    color: black;
-                    text-decoration: none;
-                }
-            </style>
         </div>
     </div>
 </div>
-
 </body>
 </html>
 
@@ -315,31 +265,13 @@ foreach ($allData as $calculation) {
     }
 
     function run(){
-        sendAjaxRequest(function(responseData){
-            console.log(responseData);
-            $("#status-text").text(responseData);
-        });
+        window.location.href = "/tis/app/views/analyze.php";
     }
 
-    function sendAjaxRequest(callBackFunction) {
-        var requestPath = "/tis/app/ajax/run_script.php";
-        var responseData = "";
-        $.ajax({
-            timeout: 1000000000,
-            url: requestPath,
-            type: 'POST',
-            dataType: 'text',
-            success: function (data) {
-                console.log("End");
-                callBackFunction(data);
-            },
-            error: function(data){
-                console.log(data);
-            },
-            data: { name: "John", location: "Boston" }
-        });
-        return responseData;
-    }
+    $(".show_info").on("click", function (e) {
+        var id = $(this).attr('data-item-id');
+        window.location.href = "/tis/app/views/item_index.php?item_id=" + id;
+    });
 
     jQuery("#ls_query").ajaxlivesearch({
         loaded_at: <?php echo time(); ?>,
@@ -355,17 +287,8 @@ foreach ($allData as $calculation) {
         },
         onResultEnter: function(e, data) {
             jQuery("#ls_query").trigger('ajaxlivesearch:search', {query: 'test'});
-        },
-        onAjaxComplete: function(e, data) {
-
         }
     });
-
-    $(".show_info").on("click", function (e) {
-        var id = $(this).attr('data-item-id');
-        window.location.href = "/tis/app/views/item_index.php?item_id=" + id;
-    });
-
 </script>
 
 

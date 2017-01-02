@@ -36,8 +36,8 @@ class Presenter {
                     $ret .= "calc." . "jobType" . " = " . "'" . $value . "'" . " and ";
                 } elseif ($key == 'method' && $value != '') {
                     $ret .= "calc." . $key . " = " . "'" . $value . "'" . " and ";
-                } elseif ($key == 'basisSet' && $value != '') {
-                    $ret .= "calc." . $key . " = " . "'" . $value . "'" . " and ";
+                } elseif ($key == 'basis_set' && $value != '') {
+                    $ret .= "calc." . 'basisSet' . " = " . "'" . $value . "'" . " and ";
                 } elseif ($key == 'stechiometry' && $value != '') {
                     $ret .= "calc." . $key . " = " . "'" . $value . "'" . " and ";
                 }
