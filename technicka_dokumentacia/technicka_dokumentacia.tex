@@ -16,13 +16,6 @@
 
 \hypersetup{unicode=true, colorlinks=true, linkcolor=black}
 
-\setcounter{secnumdepth}{4}
-
-\titleformat{\paragraph}
-{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
-\titlespacing*{\paragraph}
-{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
-
 \begin{document}
 	
 \begin{titlepage}
@@ -58,14 +51,7 @@
 \subsection{Úvod}
 
 \subsubsection{Účel}
-Špecifikácia obsahuje požiadavky, ktoré bude aplikácia implemento-
-vať. Je určená pre každého, kto sa bude podieľať na vývoji. Zadávateľ pro-
-jektu na základe špecifikácie skontroluje, či výsledná aplikácia bude
-spĺňať všetky jeho požiadavky. Členovia vývojového tímu ju budú používať
-pri plánovaní a riadení procesu vývoja. Pomôže im pri ďalšom návrhu apliká-
-cie a neskôr im ju umožní otestovať. Špecifikácia nie je odborným tex-
-tom, je zrozumiteľná rovnako pre vývojárov aj zadávateľa projektu. Všetky
-použité odborné termíny sú vysvetlené v sekcii Definície, akronymi a skratky.
+Špecifikácia obsahuje požiadavky, ktoré bude aplikácia implementovať. Je určená pre každého, kto sa bude podieľať na vývoji. Zadávateľ projektu na základe špecifikácie skontroluje, či výsledná aplikácia bude spĺňať všetky jeho požiadavky. Členovia vývojového tímu ju budú používať pri plánovaní a riadení procesu vývoja. Pomôže im pri ďalšom návrhu aplikácie a neskôr im ju umožní otestovať. Špecifikácia nie je odborným textom, je zrozumiteľná rovnako pre vývojárov aj zadávateľa projektu. Všetky použité odborné termíny sú vysvetlené v sekcii Definície, akronymi a skratky.
 
 \subsubsection{Rozsah projektu}
 Projekt sa radí medzi stredne veľké projekty. Jeho vývoj bude prebiehať v časovom horizonte približne pol roka, pričom jeho samotná implementácia bude prebiehať v rozsahu jedného mesiaca. Obsah aplikácie bude pozostávať z častí ako sú crawler, lexer, parser, ORM a jednoduchého, no súčasne intuitívneho grafického užívateľského rozhrania.
@@ -76,8 +62,8 @@ Projekt sa radí medzi stredne veľké projekty. Jeho vývoj bude prebiehať v �
 	\item Lexer - nástroj, ktorý analyzuje štruktúru súboru (dokumentu)
 	\item Parser - nástroj na spracovanie údajov zo súborov
 	\item ORM - nástroj na prácu s databázou z programovacieho jazyka
-	\item mysql - relačná (sql) databáza na ukladanie údajov
-	\item apache - webový server, na ktorom bude bežať grafické používateľské rozhranie aplikácie
+	\item MySQL - relačná (sql) databáza na ukladanie údajov
+	\item Apache - webový server, na ktorom bude bežať grafické používateľské rozhranie aplikácie
 \end{itemize}
 
 \subsubsection{Odkazy}
@@ -104,9 +90,7 @@ Projekt bude mať otvorený zdrojový kód. Bude bežať na linuxovom serveri a 
 \end{itemize}
 
 \subsubsection{Charakteristika používateľov}
-Aplikácia je určená pre chemikov, ktorí pracujú s veľkým množstvom dát
-z vypočítaných výpočtov a potrebujú v nich mať poriadok. Vzhľadom na
-povahu aplikácie, nebudú existovať špeciálne používateľské role.
+Aplikácia je určená pre chemikov, ktorí pracujú s veľkým množstvom dát z vypočítaných výpočtov a potrebujú v nich mať poriadok. Vzhľadom na povahu aplikácie, nebudú existovať špeciálne používateľské role.
 
 \subsubsection{Všeobecné obmedzenia}
 \begin{itemize}
@@ -118,28 +102,26 @@ povahu aplikácie, nebudú existovať špeciálne používateľské role.
 \end{itemize}
 
 \subsubsection{Predpoklady a závislosti}
-Aplikácia bude bežať na linuxovom serveri. Bude využívať relačnú da-
-tabázu na ukladanie údajov. Predpokladáme, že nebude mať veľké nároky
-na procesor a operačnú pamäť. Vzhľadom na povahu dát, ktoré budú v
-databáze uložené, bude jej veľkosť maximálne niekoľko desiatok megabajtov.
-Používateľské rozhranie bude bežať na webovom serveri.
+Aplikácia bude bežať na linuxovom serveri. Bude využívať relačnú databázu na ukladanie údajov. Predpokladáme, že nebude mať veľké nároky na procesor a operačnú pamäť. Vzhľadom na povahu dát, ktoré budú v databáze uložené, bude jej veľkosť maximálne niekoľko desiatok megabajtov. Používateľské rozhranie bude bežať na webovom serveri.
+
+\pagebreak
 
 \subsection{Zoznam špecifických požiadaviek na systém}
 \begin{enumerate}[label={[\arabic*]}]
-	\item { \bf Vyhľadávanie a spracovanie súborov s dátami } 
+	\item {\bf Vyhľadávanie a spracovanie súborov s dátami} 
 	\begin{enumerate}
 		\item Aplikácie bude vyhľadávať súbory na serveroch ktoré obsahujú výsledky výpočtov z meracích zariadení. vyhľadávať bude na základe prípony v názve súboru. Konkrétne priečinky, ktoré sa budú prehľadávať budú špecifikované v konfiguračnom súbore, ktorý budú editovať používatelia.
-		\item Nad zozbieranými súbormi prebehne jednoduchá syntaktická anal\-ýza. Tým sa vylúčia súbory, ktoré sú chybné, resp. neobsahujú požadované informácie
+		\item Nad zozbieranými súbormi prebehne jednoduchá syntaktická analýza. Tým sa vylúčia súbory, ktoré sú chybné, resp. neobsahujú požadované informácie.
 		\item Dáta z validných súborov sa rozparsujú na tokeny, čiže konkrétne údaje, ktoré sa uložia do databázy vo forme tabuliek.
 		\item Údaje v databáze budú aktualizované v pravidelných časových intervaloch alebo na vyžiadanie používateľa.
 	\end{enumerate}
-	\item { \bf  Používateľské rozhranie aplikácie } 
+	\item {\bf Používateľské rozhranie} 
 	\begin{enumerate}
 		\item Po otvorení stránky sa zobrazí prihlasovacia obrazovka, kde je potrebné zadať prihlasovacie údaje.
-		\item V prípade zabudnutia hesla, bude možnosť obnoviť heslo, po za\-daní emailu.
-		\item Po prihlásení sa zobrazí rozhranie aplikácie, ktoré bude generované dynamicky na základe zvolených kritérii filtrovania údajov, bude obsahovať ovládacie prvky, konkrétne tlačidlo na odhlásenie sa z aplikácie, tlačidlo na aktualizácie údajov v databáze, jednoduchý vyhľadávací box, ktorý bude prehľadávať databázu na základe zvolených kritérii, možnosť editácie konfiguračných súborov a mo\-žnosť vykreslenia náhľadu molekuly.
-		\item Kritéria, podľa ktorých bude možné vyhľadávať budú napríklad báza, metóda, stechometria(vzorec) molekuly, dátum a ďalšie.
-		\item Údaje sa budú zobrazovať v prehľadnej tabuľke
+		\item V prípade zabudnutia hesla, bude možnosť obnoviť heslo, po zadaní emailu.
+		\item Po prihlásení sa zobrazí rozhranie aplikácie, ktoré bude generované dynamicky na základe zvolených kritérii filtrovania údajov, bude obsahovať ovládacie prvky, konkrétne tlačidlo na odhlásenie sa z aplikácie, tlačidlo na aktualizácie údajov v databáze, jednoduchý vyhľadávací box, ktorý bude prehľadávať databázu na základe zvolených kritérii, možnosť editácie konfiguračných súborov a možnosť vykreslenia náhľadu molekuly.
+		\item Kritéria, podľa ktorých bude možné vyhľadávať budú napríklad báza, metóda, stechometria (vzorec) molekuly, dátum a ďalšie.
+		\item Údaje sa budú zobrazovať v prehľadnej tabuľke.
 	\end{enumerate}
 \end{enumerate}
 
@@ -149,8 +131,9 @@ Používateľské rozhranie bude bežať na webovom serveri.
 
 \subsubsection{Entitno-relačný diagram}
 \begin{figure}[H]
+	\centering
 	\caption{Entitno-relačný diagram}
-	\includegraphics[width=\textwidth]{er_diagram}
+	\includegraphics[width=0.65\textwidth]{er_diagram}
 	\label{fig:er_diagram}
 \end{figure}
 \ref{fig:er_diagram}
@@ -158,8 +141,9 @@ Entitno-relačný diagram znázorňuje vzťahy (relácie) medzi entitami. Diagra
 
 \subsubsection{Use-case diagram}
 \begin{figure}[H]
+	\centering
 	\caption{Use-case diagram}
-	\includegraphics[width=\textwidth]{use-case}
+	\includegraphics[width=0.75\textwidth]{use-case}
 	\label{fig:use_case}
 \end{figure}
 \ref{fig:use_case}
@@ -167,8 +151,9 @@ Use-case diagram popisuje interakciu používateľov (aktorov) s aplikáciou. Ne
 
 \subsubsection{Stavový diagram}
 \begin{figure}[H]
+	\centering
 	\caption{Stavový diagram}
-	\includegraphics[width=\textwidth]{state}
+	\includegraphics[width=0.75\textwidth]{state}
 	\label{fig:state}
 \end{figure}
 \ref{fig:state}
@@ -190,7 +175,7 @@ Diagram popisuje komunikáciu komponentov našej aplikácie počas spracovania s
 	\label{fig:db}
 \end{figure}
 \ref{fig:db}
-Diagram popisuje proces pripojenia k databáze. Knižnica PDO pošle požiadavku na získanie spojenia k databáze driver manageru. Ten načíta driver, vyberie správny a vytvorí jeho inštanciu. Driver sa následne pokúsi vytvoriť spojenie k databáze tým, že sa pokúsi pripojiť na socket. V prípade neúspechu sa pošle správa do PDO o neúspechu. V prípade úspešného pripojenia na socket sa vráti spojenie k databáze do PDO.
+Diagram popisuje proces pripojenia k databáze. Knižnica PDO pošle požiadavku na získanie spojenia k databáze driver manageru. Ten načíta driver, vyberie správny a vytvorí jeho inštanciu. Driver sa následne pokúsi vytvoriť spojenie k databáze tým, že sa pokúsi pripojiť na socket. V prípade neúspechu sa o ňom pošle správa do PDO. V prípade úspešného pripojenia na socket sa vráti spojenie k databáze do PDO.
 
 \subsubsection{Dátový model}
 \begin{figure}[H]
@@ -207,32 +192,40 @@ Dátový model popisuje štruktúru databázy.
 	Tabuľka coordinates obsahuje zoznam súradníc jednotlivých atómov. Súradnice atómov majú priradené id, plniace funkciu primárneho kľúča (pointCoordinateId), atóm, ktorému prislúchajú (atom), súradnicu x (x), súradnicu y (y) a súradnicu z (z).
 	\item{\bf Users} \par
 	Tabuľka users obsahuje zoznam používateľov. Používatelia majú priradené id, plniace funkciu primárneho kľúča (userId), meno, pod ktorým sa prihlasujú (login) a heslo, s ktorým sa prihlasujú (password).
+	
+\pagebreak
+	
 	\item{\bf History} \par
 	Tabuľka history obsahuje zoznam spracovaných súborov. Spracované súbory majú priradené id, plniace funkciu primárneho kľúča (historyID) a cestu, ktorá popisuje ich umiestnenie (path).
 	\item{\bf Logs} \par
 	Tabuľka logs obsahuje zoznam chybových správ. Chybové správy majú priradené id, plniace funkciu primárneho kľúča (logID) a text, ktorý je ich obsahom (logText).
-	\item{\bf Popis vzťahov} \par
+	\item{\bf Popis vzťahov medzi entitami} \par
 	Tabuľky users, history a logs sa neviažu na žiadnu tabuľku. Tabuľka coordinates sa viaže na tabuľku calculations tak, že jedna súradnica atómu je obsiahnutá v práve jednom výsledku výpočtu, pričom jeden výsledok výpočtu môže obsahovať niekoľko súradníc atómov.
 \end{itemize}
 
+\pagebreak
+
 \subsubsection{Komponentný diagram}
+\begin{figure}[H]
+	\centering
+	\caption{Komponentný diagram}
+	\includegraphics[width=0.7\textwidth]{komponentny_diagram}
+	\label{fig:komponentny_diagram}
+\end{figure}
+\ref{fig:komponentny_diagram}
 Komponentný diagram popisuje dekompozíciu projektu na moduly.
 \begin{itemize}
-	\item{\bf Autorizácia} \par
-	Pomocou komponentu autorizácia sa budúci používateľ správnym vyplnením prihlasovacieho formulára prihlási do systému. Údaje z formulára sa porovnajú s údajmi v databáze. Pri zhode sa používateľ prihlási do systému, kde má k dispozícií rôznu funkcionalitu.
-	\item{\bf Crawler} \par
-	Komponent Crawler bude vyhľadávať súbory s výsledkami výpočtov z meracích prístrojov, ktoré sú uložené na konkrétnych serveroch.
-	\item{\bf Spracovanie súboru} \par
-	Komponent spracovanie súboru analyzuje (zistí či súbory majú validnú štruktúru) a následne spracuje vyhľadané súbory do vhodného formátu.
-	\item{\bf Databáza} \par
-	Komponent databáza má na starosti pripojenie a prácu s databázou.
+	\item{\bf Frontend} \par
+	Komponent frontend má na starosti sprístupnenie viditeľného obsahu aplikácie (napr. rozloženie stránky, užívateľské rozhranie, grafika, text) používateľovi.
+	\item{\bf Database} \par
+	Komponent database má na starosti pripojenie k databáze a prácu s ňou. Získava a ukladá údaje.
+	\item{\bf Analyzer} \par
+	Komponent analyzer má na starosti rozparsovanie súboru s výsledkami výpočtov z meracích prístrojov. Dostane súbor a povyberá z neho potrebné údaje.
+	\item{\bf Files Manager} \par
+	Komponent files manager má na starosti vyhľadávanie a kontrolovanie valídnosti súborov uložených na konkrétnych serveroch. Dostane cesty k priečinkom, v ktorých nájde súbory so zadanými koncovkami. Následne zistí či nájdené súbory majú validnú štruktúru.
+	\item{\bf Popis toku údajov medzi komponentami} \par
+	Tok údajov medzi komponentami je znázornený úsečkami so zodpovedajúcimi symbolmi. Kalichom na strane prijímateľa a guličkou na strane poskytovateľa.
 \end{itemize}
-
-\subsubsection{Domain-level class diagram}
-
-
-\subsubsection{Data-flow diagram}
-
 
 \subsubsection{Triedny diagram}
 \begin{figure}[H]
@@ -241,7 +234,7 @@ Komponentný diagram popisuje dekompozíciu projektu na moduly.
 	\label{fig:class_diagram}
 \end{figure}
 \ref{fig:class_diagram}
-Triedny diagram modeluje jednotlivé triedy a vzťahy medzi nimi. Každá entita triedneho diagramu popisuje triedu, jej základné atribúty a metódy. Medzi triedami sú šípky, ktoré reprezenutujú jednotlivé vzťahy. Parser bude používať Crawler na vyhľadanie súborov a rovanko bude používať aj Lexer, pomocou, ktorého spraví lexikálnu analýzu súboru. Interactor bude akési spojítko jednotlivých hlavných častí aplikácie. View-u bude poskytovať dáta na zobrazenie a Parseru poskytne prístup k databáze.
+Triedny diagram modeluje jednotlivé triedy a vzťahy medzi nimi. Každá entita triedneho diagramu popisuje triedu, jej základné atribúty a metódy. Medzi triedami sú šípky, ktoré reprezenutujú jednotlivé vzťahy. Parser bude používať Crawler na vyhľadanie súborov a rovnako bude používať aj Lexer, pomocou, ktorého spraví lexikálnu analýzu súboru. Interactor bude akési spojítko jednotlivých hlavných častí aplikácie. View-u bude poskytovať dáta na zobrazenie a Parseru poskytne prístup k databáze.
 
 \subsection{Používateľské rozhranie}
 Používateľké rozhranie aplikácie je navrhnuté jednoducho podľa požiadaviek zadávateľa projektu.
@@ -266,6 +259,8 @@ Po prihlásení sa zobrazí hlavná stránka. Nachádza sa na nej tabuľka všet
 \end{figure}
 \ref{fig:ui3}
 Pri každom výpočte zobrazenom v tabuľke sa nachádza tlačidlo “Show details”. Kliknutím na toto tlačidlo sa zobrazí detailný výpis všetkých informácií o výpočte v prehľadnej tabuľke.
+
+\pagebreak
 
 \subsection{Analýza technológií}
 
@@ -313,20 +308,12 @@ Otestovať rozlišovanie medzi linuxovým a windowsovým súborom (rozdiel je v 
 Otestovať pridávanie nových prvkov do databázy. Pridá sa nový korektný súbor a následne treba zistiť, či sa pridal aj do databázy. Pridá sa nový nekorektný súbor a následne treba skontrolovať, či sa údaje zo súboru nepridali do databázy.
 
 \subsubsection{Prihlásenie}
-Otestovať správne prihlásenie používateľa. V používateľskom rozhraní
-sa zadajú správne prihlasovacie údaje (meno a heslo), očakávaným výsled-
-kom je úspešné prihlásenie sa na stránku. Zadajú sa nesprávne prihlasovacie
-údaje (nesprávne meno alebo nesprávne heslo alebo oboje), aplikácia zobrazí
-chybovú hlášku zlého prihlásenia a stránka nie je dostupná.
+Otestovať správne prihlásenie používateľa. V používateľskom rozhraní sa zadajú správne prihlasovacie údaje (meno a heslo), očakávaným výsledkom je úspešné prihlásenie sa na stránku. Zadajú sa nesprávne prihlasovacie údaje (nesprávne meno alebo nesprávne heslo alebo oboje), aplikácia zobrazí chybovú hlášku zlého prihlásenia a stránka nie je dostupná.
 
 \subsubsection{Vyhľadávanie v databáze}
-Otestovať správnosť vyhľadávania v databáze. Zadajú sa parametre,
-podľa ktorých sa v databáze nachádzajú nejaké molekuly, aplikácia zobrazí
-všetky molekuly korektne.
+Otestovať správnosť vyhľadávania v databáze. Zadajú sa parametre, podľa ktorých sa v databáze nachádzajú nejaké molekuly, aplikácia zobrazí všetky molekuly korektne.
 
 \subsubsection{Pridávanie nových súborov}
-Otestovať aktualizovanie databázy. Po pridaní nového súboru cez použí-
-vateľské rozhranie, sa automaticky aktualizuje databáza a pri vyhľadávaní
-molekúl sa zobrazia aj najnovšie pridané údaje.
+Otestovať aktualizovanie databázy. Po pridaní nového súboru cez používateľské rozhranie, sa automaticky aktualizuje databáza a pri vyhľadávaní molekúl sa zobrazia aj najnovšie pridané údaje.
 
 \end{document}
