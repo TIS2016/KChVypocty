@@ -25,9 +25,7 @@ $logs = $entityManager->createQuery($dql)
 $i = 1;
 
 if (isset($_POST['back'])){
-    echo "something";
     header("Location: table_index.php");
-
 }
 ?>
 

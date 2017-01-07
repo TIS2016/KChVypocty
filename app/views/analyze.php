@@ -6,9 +6,7 @@ require_once '../../vendor/autoload.php';
 require_once '../../bootstrap.php';
 
 $interactor = new Interactor();
-
 if (isset($_POST['back'])){
-    echo "something";
     header("Location: table_index.php");
 
 }
