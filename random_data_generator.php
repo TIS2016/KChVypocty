@@ -3,9 +3,6 @@ require_once "vendor/autoload.php";
 use App\Db\Calculation;
 use App\DoctrineSetup;
 
-
-
-
 $faker = Faker\Factory::create();
 for ($i = 0; $i < 500; $i++) {
     $calculation = new Calculation();

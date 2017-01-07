@@ -6,6 +6,13 @@ use App\Db\Calculation;
 use App\Db\Coordinate;
 use App\Db\History;
 
+/**
+ * Class CalculationResult
+ * @package App
+ *
+ * Represents calculations result and inserts them into database
+ *
+ */
 class CalculationResult {
     private $tokens;
     private $body;
@@ -25,10 +32,19 @@ class CalculationResult {
         $this->thermoChemistry = $thermoChemistry;
     }
 
+    /**
+     * @return method name
+     *
+     * Helper method
+     *
+     */
     public function getMethod() {
         return $this->tokens[2];
     }
 
+    /**
+     * Inserts data to the database with doctrine ORM
+     */
     public function insert() {
         $calculationDatabase = new Calculation();
         $calculationDatabase->setServer($this->tokens[0]);

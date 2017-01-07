@@ -6,6 +6,10 @@ require_once '../../vendor/autoload.php';
 require_once '../../bootstrap.php';
 
 $interactor = new Interactor();
+if (isset($_POST['back'])){
+    header("Location: table_index.php");
+
+}
 ?>
 
 <!DOCTYPE>
@@ -24,6 +28,9 @@ $interactor = new Interactor();
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-12">
+                    <form method="post" >
+                        <input type="submit" value="späť" name="back">
+                    </form>
                     <?php if ($interactor->isRunning()): ?>
                         <h2>Parser is already running</h2>
                     <?php else: ?>

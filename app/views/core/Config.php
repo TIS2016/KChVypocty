@@ -43,7 +43,7 @@ class Config
                  * searchPattern is used to specify how the query is searched.
                  * possible values are: 'q', '*q', 'q*', '*q*'. this is required
                  */
-                'searchPattern'      => 'q*',
+                'searchPattern'      => '*q*',
                 // specify search query case sensitivity
                 'caseSensitive'      => false,
                 // to limit the maximum number of result uncomment this:

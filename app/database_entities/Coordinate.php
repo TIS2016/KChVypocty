@@ -24,100 +24,51 @@ class Coordinate {
     /** @Column(type="float") **/
     protected $z;
 
-    /**
-     * @return mixed
-     */
-    public function getPointCoordinateId()
-    {
+    public function getPointCoordinateId(){
         return $this->pointCoordinateId;
     }
 
-    /**
-     * @param mixed $pointCoordinateId
-     */
-    public function setPointCoordinateId($pointCoordinateId)
-    {
+    public function setPointCoordinateId($pointCoordinateId){
         $this->pointCoordinateId = $pointCoordinateId;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getAtom()
-    {
+    public function getAtom(){
         return $this->atom;
     }
 
-    /**
-     * @param mixed $x
-     */
-    public function setAtom($atom)
-    {
+    public function setAtom($atom){
         $this->atom = $atom;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getX()
-    {
+    public function getX(){
         return $this->x;
     }
 
-    /**
-     * @param mixed $x
-     */
-    public function setX($x)
-    {
+    public function setX($x){
         $this->x = $x;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getY()
-    {
+    public function getY(){
         return $this->y;
     }
 
-    /**
-     * @param mixed $y
-     */
-    public function setY($y)
-    {
+    public function setY($y){
         $this->y = $y;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getZ()
-    {
+    public function getZ(){
         return $this->z;
     }
 
-    /**
-     * @param mixed $y
-     */
-    public function setZ($z)
-    {
+    public function setZ($z){
         $this->z = $z;
     }
 
-
-    /**
-     * @return mixed
-     */
-    public function getCalculation()
-    {
+    public function getCalculation(){
         return $this->calculation;
     }
 
-    /**
-     * @param mixed $calculation
-     */
-    public function setCalculation($calculation)
-    {
+    public function setCalculation($calculation){
         $this->calculation = $calculation;
     }
 
