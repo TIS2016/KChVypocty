@@ -3,6 +3,12 @@ namespace App;
 //require_once '../vendor/autoload.php';
 use App\Db\Logs;
 
+/**
+ * Class Interactor
+ * @package App
+ *
+ * Provides data for views
+ */
 class Interactor {
 
     const FILE_WITH_DIRECTORIES = "/home/tis/KChVypocty/app/crawl_dirs";
