@@ -47,163 +47,83 @@ class Calculation {
     protected $thermoChemistry;
 
 
-    /**
-     * @return mixed
-     */
-    public function getCalculationID()
-    {
+    public function getCalculationID(){
         return $this->calculationID;
     }
 
-    /**
-     * @param mixed $calculationID
-     */
-    public function setCalculationID($calculationID)
-    {
+    public function setCalculationID($calculationID){
         $this->calculationID = $calculationID;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getJobType()
-    {
+    public function getJobType(){
         return $this->jobType;
     }
 
-    /**
-     * @param mixed $jobType
-     */
-    public function setJobType($jobType)
-    {
+    public function setJobType($jobType){
         $this->jobType = $jobType;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getMethod()
-    {
+    public function getMethod(){
         return $this->method;
     }
 
-    /**
-     * @param mixed $method
-     */
-    public function setMethod($method)
-    {
+    public function setMethod($method){
         $this->method = $method;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getBasisSet()
-    {
+    public function getBasisSet(){
         return $this->basisSet;
     }
 
-    /**
-     * @param mixed $basisSet
-     */
-    public function setBasisSet($basisSet)
-    {
+    public function setBasisSet($basisSet){
         $this->basisSet = $basisSet;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getStechiometry()
-    {
+    public function getStechiometry(){
         return $this->stechiometry;
     }
 
-    /**
-     * @param mixed $stechiometry
-     */
-    public function setStechiometry($stechiometry)
-    {
+    public function setStechiometry($stechiometry){
         $this->stechiometry = $stechiometry;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getUser()
-    {
+    public function getUser(){
         return $this->user;
     }
 
-    /**
-     * @param mixed $user
-     */
-    public function setUser($user)
-    {
+    public function setUser($user){
         $this->user = $user;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getDate()
-    {
+    public function getDate(){
         return $this->date;
     }
 
-    /**
-     * @param mixed $date
-     */
-    public function setDate($date)
-    {
+    public function setDate($date){
         $this->date = $date;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getServer()
-    {
+    public function getServer(){
         return $this->server;
     }
 
-    /**
-     * @param mixed $server
-     */
-    public function setServer($server)
-    {
+    public function setServer($server){
         $this->server = $server;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getPath()
-    {
+    public function getPath(){
         return $this->path;
     }
 
-    /**
-     * @param mixed $path
-     */
-    public function setPath($path)
-    {
+    public function setPath($path){
         $this->path = $path;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getCoordinates()
-    {
+    public function getCoordinates(){
         return $this->coordinates;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getCoordinatesFormat()
-    {
+    public function getCoordinatesFormat(){
         $coordinates = "";
         foreach ($this->coordinates as $coordinate) {
             $coordinates .=
@@ -221,84 +141,47 @@ class Calculation {
             $atom = [];
             $atom['atom'] = $coordinate->getAtom();
             $atom['y'] = $coordinate->getY();
-            $atom['x'] = $coordinate->getX
-            ();
+            $atom['x'] = $coordinate->getX();
             $atom['z'] = $coordinate->getZ();
             $coordinatesArray[] = $atom;
         }
         return $coordinatesArray;
     }
 
-    /**
-     * @param mixed $coordinates
-     */
-    public function setCoordinates($coordinates)
-    {
+    public function setCoordinates($coordinates){
         $this->coordinates = $coordinates;
     }
 
 
-    /**
-     * @return mixed
-     */
-    public function getInfoInput()
-    {
+    public function getInfoInput(){
         return $this->infoInput;
     }
 
-    /**
-     * @param mixed $infoInput
-     */
-    public function setInfoInput($infoInput)
-    {
+    public function setInfoInput($infoInput){
         $this->infoInput = $infoInput;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getInfoEnd()
-    {
+    public function getInfoEnd(){
         return $this->infoEnd;
     }
 
-    /**
-     * @param mixed $infoEnd
-     */
-    public function setInfoEnd($infoEnd)
-    {
+    public function setInfoEnd($infoEnd){
         $this->infoEnd = $infoEnd;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getEnergy()
-    {
+    public function getEnergy(){
         return $this->energy;
     }
 
-    /**
-     * @param mixed $energy
-     */
-    public function setEnergy($energy)
-    {
+    public function setEnergy($energy){
         $this->energy = $energy;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getThermoChemistry()
-    {
+    public function getThermoChemistry(){
         return $this->thermoChemistry;
     }
 
-    /**
-     * @param mixed $thermoChemistry
-     */
-    public function setThermoChemistry($thermoChemistry)
-    {
+    public function setThermoChemistry($thermoChemistry){
         $this->thermoChemistry = $thermoChemistry;
     }
 
