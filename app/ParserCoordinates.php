@@ -2,7 +2,13 @@
 
 namespace App;
 
-
+/**
+ * Class ParserCoordinates
+ * @package App
+ *
+ * Parse coordinates from file
+ *
+ */
 class ParserCoordinates {
     private $coordinates;
     private $method;
@@ -11,6 +17,13 @@ class ParserCoordinates {
     private $parserJobTypesExtra;
     private $periodicTable;
 
+		/**
+     * ParserCoordinates constructor.
+     * @param $coordinates
+     *
+     * Constructor sets up coordinates (part of calculation)
+     *
+     */
     public function __construct($coordinates) {
         $this->coordinates = $coordinates;
         $this->parserJobTypesExtra = new ParserJobTypesExtra();
@@ -29,6 +42,10 @@ class ParserCoordinates {
         $this->specialCharacter = $specialCharacter;
     }
 
+		/**
+		 * @return array
+     * Fill periodic table, 0. atom is X, additional atom
+     */
     private function fillPeriodicTable() {
         $this->periodicTable = array(
           "X","H","He","Li","Be","B","C","N","O","F","Ne","Na","Mg","Al","Si","P",
@@ -49,6 +66,10 @@ class ParserCoordinates {
         return $this->periodicTable[$value];
     }
 
+		/**
+		 * @return array
+     * Decide type of coordinates and parse them
+     */
     public function parseCoordinates() {
         if ($this->method === $this->parserJobTypesExtra->getScan()) {
             $matrix = $this->getStandardOrientation();
@@ -66,6 +87,9 @@ class ParserCoordinates {
         return $this->coordinates;
     }
 
+		/**
+     * Parse coordinates from calculation ($this->coordinates)
+     */
     private function parseNormalCoordinates() {
         $tempCoordinates = $this->coordinates . $this->specialCharacter;
         $coordinates = array();
@@ -78,7 +102,10 @@ class ParserCoordinates {
         $this->coordinates = $this->splitCoordinates($coordinates);
     }
 
-
+		/**
+		 * @param $matrix
+     * Parse coordinates from matrix (Z-Matrix orientation)
+     */
     private function parseZMatrixCoordinates($matrix) {
         $matrix = $this->removeNewlines($matrix);
         $matrix = explode(" ", $matrix);
@@ -112,13 +139,28 @@ class ParserCoordinates {
         }
     }
 
+		/**
+		 * @param $i
+		 * @return boolean
+     * Filter for unnecessary data from one coordinate string
+     */
     private function filterUnnecessary($i){
         return ($i % 6 != 0) && (($i - 2) % 6 != 0);
     }
 
+		/**
+		 * @param $i
+		 * @return boolean
+     * Filter for atom in string
+     */
     private function filterAtom($i) {
         return ($i - 1) % 6 == 0;
     }
+
+		/**
+		 * @return string
+     * Return last Z-Matrix-Orientation string of coordinates from file
+     */
 
     private function getZMatrixOrientation() {
         $startIndex = strrpos($this->file, "Z-Matrix orientation:");
@@ -140,6 +182,10 @@ class ParserCoordinates {
         return $zMatrixArray[1];
     }
 
+		/**
+		 * @return string
+     * Return first Standard-Orientation string of coordinates from file
+     */
     private function getStandardOrientation() {
         $startIndex = strpos($this->file, "Standard orientation:");
         $zMatrix = substr($this->file, $startIndex, strlen($this->file));
@@ -160,6 +206,11 @@ class ParserCoordinates {
         return $zMatrixArray[1];
     }
 
+		/**
+		 * @param $coordinates
+		 * @return array
+     * Coordinates are splited into array from string
+     */
     private function splitCoordinates($coordinates) {
         $result = array();
         foreach($coordinates as $coordinate) {

@@ -2,7 +2,13 @@
 
 namespace App;
 
-
+/**
+ * Class Parser
+ * @package App
+ *
+ * Parse required parts (calculations) and insert them into database
+ *
+ */
 class Parser {
     private $calculations;
     private $specialCharacter;
@@ -13,7 +19,14 @@ class Parser {
     private $parserMethodsExtra;
     private $newLine;
     private $calculationResults;
-
+		
+		/**
+     * Parser constructor.
+     * @param $calculations
+     *
+     * Constructor sets up parts of file (calculations) that will be parsed
+     *
+     */
     public function __construct($calculations) {
         $this->calculations = $calculations;
         $this->replaceCharacter = "$";
@@ -35,6 +48,9 @@ class Parser {
         $this->file = $file;
     }
 
+		/**
+     * Set newline depending on type of file (linux or windows)
+     */
     private function setNewLine() {
         $extension = pathinfo($this->path, PATHINFO_EXTENSION);
         if ($extension === Lexer::LINUX_FILE_EXTENSION) {
@@ -44,6 +60,9 @@ class Parser {
         }
     }
 
+		/**
+     * Parse all calculations from file, if used method is one of GMethods, insert only last calculation into database, otherwise insert all
+     */
     public function parseCalculations() {
         foreach($this->calculations as $calculation) {
             $this->parseCalculation($calculation);
@@ -59,6 +78,11 @@ class Parser {
         }
     }
 
+		/**
+     * @param $calculation 
+		 * Parse one calculation, first row (heading), info from input, coordinates, energy, thermochemistry (if exists), 
+		 * info from end and add to global array $calculationResults
+     */
     private function parseCalculation($calculation) {
         $calculation = $this->removeNewlines($calculation);
         $head = $this->parseHead($calculation);
@@ -107,6 +131,11 @@ class Parser {
         $this->calculationResults[] = $calculationResult;
     }
 
+		/**
+		 * @param $calculation
+		 * @return array
+     * Parse first row from calculation, job type, method, basis set, stechiometry, user, date and server
+     */
     private function parseHead($calculation) {
         $startSequence = '1' . $this->specialCharacter . '1' . $this->specialCharacter;
         $endSequence = $this->specialCharacter . $this->specialCharacter . '#';
@@ -125,6 +154,11 @@ class Parser {
         return array($calculation, $tokenArray);
     }
 
+		/**
+		 * @param $calculation
+		 * @return array
+     * Parse info from input from calculation
+     */
     private function parseBody($calculation) {
         $endIndex = strpos($calculation, $this->specialCharacter);
         $parseBody = substr($calculation, 0, $endIndex);
@@ -133,6 +167,11 @@ class Parser {
         return array($calculation, $parseBody);
     }
 
+		/**
+		 * @param $calculation
+		 * @return array
+     * Parse coordinates in class ParserCoordinates and return correct coordinates
+     */
     private function parseCoordinates($calculation, $method) {
         $endIndex = strpos($calculation, "Version");
         $tempCoordinates = substr($calculation, 0, $endIndex-1);
@@ -145,6 +184,11 @@ class Parser {
         return array ($calculation, $coordinates);
     }
 
+		/**
+		 * @param $calculation
+		 * @return string
+     * Parse info from end of calculation
+     */
     private function parseTail($calculation) {
         $endIndex = strpos($calculation, $this->replaceCharacter);
         $tail = substr($calculation, 0, $endIndex);
@@ -153,6 +197,11 @@ class Parser {
         return $tail;
     }
 
+		/**
+		 * @param $calculation
+		 * @return string
+     * Parse info from end of calculation if job type is Freq
+     */
     private function parseFreqTail($calculation) {
         $startIndex = strpos($calculation, "NImag");
         $calculation = substr($calculation, $startIndex, strlen($calculation)-$startIndex);
@@ -161,6 +210,11 @@ class Parser {
         return $tail;
     }
 
+		/**
+		 * @param $tokenArray
+		 * @return string
+     * Parse energy if method is one of GMethods
+     */
     private function parseEnergyGMethods($tokenArray) {
         $tokenString = implode($this->specialCharacter, $tokenArray);
         $endIndex = strpos($this->file, $tokenString);
@@ -171,6 +225,10 @@ class Parser {
         return $energy;
     }
 
+		/**
+		 * @return string
+     * Parse energy if method is OVGF, energy is in whole file, not in calculation
+     */
     private function parseEnergyOVGF() {
         $allEnergy = "";
         $startSequence = "Summary of results for alpha spin-orbital";
@@ -199,6 +257,11 @@ class Parser {
         return $allEnergy;
     }
 
+		/**
+		 * @param $tail
+		 * @return array
+     * Parse default energy from tail of calculation
+     */
     private function parseEnergy($tail) {
         $startSequence = "State";
         $endSequence = "RMSD";
@@ -218,6 +281,10 @@ class Parser {
         return array($energy, $tail);
     }
 
+		/**
+		 * @return string
+     * Parse thermochemistry from whole file, thermochemistry is not in calculation
+     */
     private function parseTermochemistry() {
         $startIndex = strpos($this->file, " Zero-point correction=");
         $subFile = substr($this->file, $startIndex, strlen($this->file)-$startIndex);
@@ -227,6 +294,11 @@ class Parser {
         return $termoChemistry;
     }
 
+		/**
+		 * @param $string
+		 * @return string
+     * Help method for formatting spaces and newlines
+     */
     private function formatSpacesForNewlines($string) {
         $string = str_replace($this->newLine, "", $string);
         $string = preg_replace("/\s\s+/", "",$string);
@@ -242,6 +314,11 @@ class Parser {
         return $calculation;
     }
 
+		/**
+		 * @param $calculation
+		 * @return string
+     * Replace all special characters (it depends on type of file -> linux or windows) with $replaceCharacter
+     */
     private function replaceDuplicities($calculation) {
         $special = $this->specialCharacter . $this->specialCharacter;
         $calculation = str_replace($special, $this->replaceCharacter, $calculation);
