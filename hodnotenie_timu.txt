@@ -1,0 +1,44 @@
+Jaroslav Ištok - zhodnotenie tímového projektu TIS
+--------------------------------------------------
+Zadanie projektu bolo pre mňa zaujímavé. Podieľal som sa takmer na všetkých častiach projektu.
+Snažil som sa rozdeliť prácu, tak aby kaťdý robil to čo ho baví najviac.
+Práca v tíme sa mi páčila. So zadávateľom sa veľmi dobre spolupracovalo, rovnako 
+stretnutia s cvičiacim hodnotím veľmi pozitívne. S prácou zvyšných členov tímu som spokojný.
+Mojím primárnym cieľom bolo, aby bol zadávateľ spokojný s našou prácou a aby mu výsledná aplikácia 
+uľahčila prácu, čo sa nám podarilo.
+
+
+
+Celkové zhodnotenie projektu:
+------------------------------
+Špecifikácia požiadaviek nebola jednoduchá, kedže sme mali spracovať dáta z chemických výpočtov,
+ktoré pre nás neboli celkom zrozumiteľné. To považujem aj za najťažšiu časť projektu, pochopiť požiadavky zadavateľa. 
+Vyžadovalo si to časté stretnutia so zadávateľom. 
+Dá sa povedať, že sme projekt vyvíjali inkrementálne. Najskôr sme sa snažili vytvoriť prototyp, 
+ktorý sme ukázali zadávateľovi a ten sme potom ďalej rozširovali na základe jeho požiadaviek. Požiadavky sa menili a pribúdali
+počas celého vývoja. Časť projektu sme vôbec neimplementovali. Jedná sa o vykreslenie náhľadu molekuly,
+nevedeli sme zistiť z dostupných informácii väzby medzi jednotlivými atómami a nakoniec sme sa so zadávateľom dohodli, že túto 
+fukncionalitu nebudeme implementovať.
+Aplikácia beží na serveri a vzhľadom na to, že nemáme administrátorské práva nebolo triviálne nakonfigurovať deployment
+a doinštalovať všetky potrebné nástroje. Rovnako nebolo jednoduché nakonfigurovať vývojové prostredia jednotlivým členom tímu.
+Ak by som sa na vývojí podobného projektu podieľal druhý krát, určite by som použil Docker, ktorý by nám veľmi uľahčil vývoj.
+
+Zhodnotenie projektu zo strany predmetu:
+-----------------------------------------
+
+Čo by som spravil inak: 
+
+	1. Každý tím by si mal vybrať vývojový model, ktorý sa hodí najviac k ich projektu a toho sa držať.
+	2. Zápisnice mi prídu úplne zbytočné a trochu sa stráca ich zmysel, je to nutné zlo a ničomu neslúžia.
+	3. Niektoré diagramy sú pri niekotrých projektoch zbytočné, malo by to byť viac flexibilné a robiť iba tie, 
+		ktoré pre daný projekt majú zmysel.
+	4. Urobiť poriadok v tom čo máme robiť a čoho sa držať... Ok chceme sa hrať na agilý tím? (zen hub, meetingy), alebo sa
+		chceme hrať na vodopád? (nutnosť mať hotový návrh a katalóg požiadaviek pred implementáciou, držanie sa pravidiel), 
+		prišlo mi to veľmi chaotické a prakticky nedodržateľné
+
+
+
+
+
+
+

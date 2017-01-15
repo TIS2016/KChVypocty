@@ -141,13 +141,132 @@ Entitno-relačný diagram znázorňuje vzťahy (relácie) medzi entitami. Diagra
 
 \subsubsection{Use-case diagram}
 \begin{figure}[H]
-	\centering
 	\caption{Use-case diagram}
-	\includegraphics[width=0.75\textwidth]{use-case}
+	\includegraphics[width=\textwidth]{use-case_diagram}
 	\label{fig:use_case}
 \end{figure}
 \ref{fig:use_case}
 Use-case diagram popisuje interakciu používateľov (aktorov) s aplikáciou. Neprihlásený používateľ sa môže prihlásiť. Prihlásený používateľ môže vyhľadávať v databáze výsledkov meraní podľa rôznych kritérií a zobraziť výpis podrobných informácií o danej molekule.
+
+\pagebreak
+
+\begin{enumerate}[label={[UC-\arabic*]}]
+	\item {\bf Prihlásenie}
+	\begin{itemize}
+		\item{\bf Opis: } Po správnom vyplnení údajov doteraz neprihláseného užívateľa prihlási do systému.
+		\item{\bf Vstupné podmienky: } Používateľ nie je prihlásený.
+		\item{\bf Používatelia: } Používateľmi sú chemici a fyzici.
+		\item{\bf Základná postupnosť: }
+		\begin{enumerate}[label={\arabic*.}]
+			\item Neprihlásený používateľ vyplní meno a heslo.
+			\item Neprihlásený používateľ stlačí tlačidlo pre prihlásenie
+			\item Systém porovná údaje.
+			\item Ak sa údaje zhodujú, systém prihlási používateľa.
+		\end{enumerate}
+		\item{\bf Alternatívna postupnosť: }
+		\begin{enumerate}[label={\arabic*.}]
+			\item Neprihlásený používateľ vyplní meno a heslo.
+			\item Neprihlásený používateľ stlačí tlačidlo pre prihlásenie
+			\item Systém porovná údaje.
+			\item Systém používateľa neprihlási do systému.
+		\end{enumerate}
+	\end{itemize}
+	\item {\bf Zobrazovanie informácií o molekulách}
+	\begin{itemize}
+		\item{\bf Opis: } Zobrazenie základných informácií o molekulách z výpočtov.
+		\item{\bf Vstupné podmienky: } Používateľ musí byt prihlásený.
+		\item{\bf Používatelia: } Používateľmi sú chemici a fyzici.
+		\item{\bf Základná postupnosť: }
+		\begin{enumerate}[label={\arabic*.}]
+			\item Používateľ sa úspešne prihlási.
+		\end{enumerate}
+	\end{itemize}
+	\item {\bf Filtrovanie}
+	\begin{itemize}
+		\item{\bf Opis: } Zobrazí len tie molekuly, ktoré vyhovujú podmienkam filtra.
+		\item{\bf Vstupné podmienky: } Používateľ musí byť prihlásený.
+		\item{\bf Používatelia: } Používateľmi sú chemici a fyzici.
+		\item{\bf Základná postupnosť: }
+		\begin{enumerate}[label={\arabic*.}]
+			\item Používateľ sa úspešne prihlási.
+			\item Zadá parametre pre filter.
+			\item Zobrazia sa požadované výsledky.
+		\end{enumerate}
+	\end{itemize}
+
+\pagebreak
+
+	\item {\bf Dynamické vyhľadávanie}
+	\begin{itemize}
+		\item{\bf Opis: } Pod formulárom sa automaticky zobrazujú tie výsledky, ktoré vyhovujú práve zadávanému reťazcu.
+		\item{\bf Vstupné podmienky: } Používateľ musí byť prihlásený.
+		\item{\bf Používatelia: } Používateľmi sú chemici a fyzici.
+		\item{\bf Základná postupnosť: }
+		\begin{enumerate}[label={\arabic*.}]
+			\item Používateľ sa úspešne prihlási.
+			\item Počas písania do formuláru sa zobrazujú výsledky.
+		\end{enumerate}
+		\item{\bf Alternatívna postupnosť: }
+		\begin{enumerate}[label={\arabic*.}]
+			\item Používateľ sa úspešne prihlási.
+			\item Počas písania do formuláru nie sú nájdené žiadne výsledky.
+		\end{enumerate}
+	\end{itemize}
+	\item {\bf Zobrazenie záznamov súborov}
+	\begin{itemize}
+		\item{\bf Opis: } Zobrazí status spracovaných súborov.
+		\item{\bf Vstupné podmienky: } Používateľ musí byť prihlásený.
+		\item{\bf Používatelia: } Používateľmi sú chemici a fyzici.
+		\item{\bf Základná postupnosť: }
+		\begin{enumerate}[label={\arabic*.}]
+			\item Používateľ sa úspešne prihlási.
+			\item Používateľ klikne na tlačítko „Show Report“.
+			\item Zobrazia sa požadované výsledky.
+		\end{enumerate}
+		\item{\bf Alternatívna postupnosť: }
+		\begin{enumerate}[label={\arabic*.}]
+			\item Používateľ sa úspešne prihlási.
+			\item Používateľ klikne na tlačítko „Show Report“.
+			\item Nezobrazia sa žiadne záznamy.
+		\end{enumerate}
+	\end{itemize}
+	\item {\bf Detail molekuly}
+	\begin{itemize}
+		\item{\bf Opis: } Zobrazí detailné informácie o molekule.
+		\item{\bf Vstupné podmienky: } Používateľ musí byť prihlásený.
+		\item{\bf Používatelia: } Používateľmi sú chemici a fyzici.
+		\item{\bf Základná postupnosť: }
+		\begin{enumerate}[label={\arabic*.}]
+			\item Používateľ sa úspešne prihlási.
+			\item Používateľ klikne na tlačidlo „Show details“.
+			\item Zobrazí sa nová stránka s detailom molekuly.
+		\end{enumerate}
+	\end{itemize}
+	\item {\bf Odhlásenie}
+	\begin{itemize}
+		\item{\bf Opis: } Systém používateľa odhlási.
+		\item{\bf Vstupné podmienky: } Používateľ musí byť prihlásený.
+		\item{\bf Používatelia: } Používateľmi sú chemici a fyzici.
+		\item{\bf Základná postupnosť: }
+		\begin{enumerate}[label={\arabic*.}]
+			\item Používateľ sa úspešne prihlási.
+			\item Používateľ klikne na tlačidlo „Odhlásenie“.
+			\item Zobrazí sa nová stránka s detailom molekuly.
+		\end{enumerate}
+	\end{itemize}
+	\item {\bf Spracovanie súborov}
+	\begin{itemize}
+		\item{\bf Opis: } Systém vojde do zadaného priečinka a spracuje v ňom všetky súbory, rozparsuje a uloží ich do databázy.
+		\item{\bf Vstupné podmienky: } Používateľ musí byť prihlásený.
+		\item{\bf Používatelia: } Používateľmi sú chemici a fyzici.
+		\item{\bf Základná postupnosť: }
+		\begin{enumerate}[label={\arabic*.}]
+			\item Používateľ sa úspešne prihlási.
+			\item Používateľ klikne na tlačidlo „Run“.
+			\item Zobrazí sa upozornenie, že používateľ spustil akciu.
+		\end{enumerate}
+	\end{itemize}
+\end{enumerate}
 
 \subsubsection{Stavový diagram}
 \begin{figure}[H]
